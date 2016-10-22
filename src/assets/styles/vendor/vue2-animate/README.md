@@ -1,0 +1,128 @@
+# vue2-animate for Vue.js 2.0
+
+*Cross-browser CSS3 animation library*
+
+[![Version](https://img.shields.io/npm/v/vue2-animate.svg?style=flat-square)](https://www.npmjs.com/package/vue2-animate)
+[![License](https://img.shields.io/npm/l/vue2-animate.svg?style=flat-square)](LICENSE)
+
+A [Vue.js](http://vuejs.org/ "Vue.js") port of [Animate.css](https://github.com/daneden/animate.css "Animate.css"). For use with Vue's built-in transitions.
+
+**This is modified version of: https://github.com/haydenbbickerton/vue-animate for Vue 2.0**
+
+##Installation
+####HTML
+Include the stylesheet:
+
+  ```html
+  <head>
+    <link rel="stylesheet" href="vue2-animate.min.css">
+  </head>
+  ```
+####npm
+  If you're on webpack and using the [css-loader](https://github.com/webpack/css-loader "css loader"), you can use something like this:
+  ```shell
+  npm install --save vue2-animate
+  ```
+  ```js
+  require('vue2-animate/dist/vue2-animate.min.css')
+  ```
+####Less
+  ```less
+  @import "<PATH_TO_SOURCE>/src/vue2-animate.less";
+  ```
+
+####Building
+  ```shell
+  git clone https://github.com/asika32764/vue2-animate.git
+  cd vue2-animate
+  npm install
+  npm run build #Compiled .css files go to the dist folder
+  ```
+
+##Usage
+
+  Use [Vue.js transitions](http://vuejs.org/guide/transitions.html "Vue.js Transitions") as you normally would, but for the transition name you will use one of [Animate.css animations](https://github.com/daneden/animate.css#basic-usage "animations") **removing** the ***In/Out*** from the name.
+
+  For example, if I want to use *fadeInLeft* and *fadeOutLeft* on my element, I'll write:
+```html
+<transition-group name="fadeLeft" tag="ul">
+    <li v-for="item in items" v-bind:key="item">
+        {{ item }}
+    </li>
+</transition-group>
+```
+  enter/leave is already written in the stylesheet, so just remove *In/Out* from the name and you're golden.
+
+####Custom Transition Classes
+
+Animate.css's original classnames are supported on enter/leave transitions. So if you're going to use [Custom Transition Classes](http://vuejs.org/guide/transitions.html#Custom-Transition-Classes "Custom Transition Classes"), you can either add *-enter/-leave* to the classes:
+
+```html
+<transition
+  name="custom-classes-transition"
+  enter-active-class="bounceLeft-enter"
+  leave-active-class="bounceRight-leave"
+>
+  <p v-if="show">hello</p>
+</transition>
+```
+  Or use the regular *In/Out* syntax:
+  
+```html
+<transition
+  name="bounce"
+  enter-active-class="bounceInLeft"
+  leave-active-class="bounceOutRight"
+>
+  <p v-if="show">hello</p>
+</transition>
+```
+
+####Supported Animations
+  Not all [Animate.css animations](https://github.com/daneden/animate.css#basic-usage "animations") are supported at the moment. Here is a list of what's in vue2-animate (aka - *what you can put in the transition="x"* attribute) as of right now:
+
+#####Bounce
+  * `bounce`
+  * `bounceDown`
+  * `bounceLeft`
+  * `bounceRight`
+  * `bounceUp`
+
+#####Fade
+  * `fade`
+  * `fadeDown`
+  * `fadeDownBig`
+  * `fadeLeft`
+  * `fadeLeftBig`
+  * `fadeRight`
+  * `fadeRightBig`
+  * `fadeUp`
+  * `fadeUpBig`
+
+#####Rotate
+  * `rotate`
+  * `rotateDownLeft`
+  * `rotateDownRight`
+  * `rotateUpLeft`
+  * `rotateUpRight`
+
+#####Slide
+  * `slideDown`
+  * `slideLeft`
+  * `slideRight`
+  * `slideUp`
+
+#####Zoom
+  * `zoom`
+  * `zoomDown`
+  * `zoomLeft`
+  * `zoomRight`
+  * `zoomUp`
+
+# License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+## Contributing
+
+Pull requests are welcome :)

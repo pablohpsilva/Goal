@@ -1,8 +1,10 @@
 <template lang="html">
   <div class="">
     <navigation></navigation>
-    <transition name="fade">
-      <register-modal v-show="open" v-bind:open.sync="open"></register-modal>
+    <transition name="zoom"
+        enter-active-class="zoomIn"
+        leave-active-class="zoomOut">
+      <register-modal v-show="open" v-bind:open="open" v-on:close-modal="closeModal"></register-modal>
     </transition>
     <div class="Dash__actions">
       <button class="Btn__clean--blue" type="button" name="button">
@@ -32,6 +34,11 @@ export default {
     Item,
     RegisterModal,
     Navigation,
+  },
+  events: {
+    closeModal() {
+      this.open = false;
+    },
   },
   methods: {},
   mounted() {},
