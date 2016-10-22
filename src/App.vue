@@ -36,4 +36,12 @@ export default {
   -ms-transform translate3d(10px, 0, 0)
   -moz-transform translate3d(10px, 0, 0)
   -webkit-transform translate3d(10px, 0, 0)
+
+body
+  margin 0
+  font-size 10px
+  background url('assets/background.svg') no-repeat center center
+  background-size cover
+  min-height 100%
+  height 100vh
 </style>

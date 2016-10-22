@@ -9,12 +9,13 @@
         Assign revenue
       </button>
     </div>
+    <item></item>
   </div>
 </template>
 
 <script type="text/babel">
-
 import Navigation from '../../shared-components/Navigation';
+import Item from './Item';
 
 export default {
   data() {
@@ -22,6 +23,7 @@ export default {
   },
   computed: {},
   components: {
+    Item,
     Navigation,
   },
   methods: {},
@@ -36,9 +38,9 @@ export default {
   +prefix-classes('Dash__')
     .actions
       flex()
-      flex-justify('space-around')
-      padding 5vh 25px
+      flex-justify(space-around)
+      padding 5vh 15px
   .Btn__clean--blue
-    font-size 3em
-    width 8.5em
+    font-size 1.5em
+    width 10em
 </style>
