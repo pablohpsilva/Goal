@@ -30,8 +30,9 @@
 </style>
 
 <template lang="html">
-  <div class="">
+  <div>
     <action-bar></action-bar>
+
     <ul class="GoalNotifications">
       <li class="GoalNotification">
         <i class="icon-list GoalNotification__Icon"></i>
