@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-
-    <hello></hello>
-
     <transition>
       <keep-alive>
         <router-view class="view"></router-view>
@@ -26,14 +22,6 @@ export default {
 <style lang="stylus">
 @import "./assets/styles/style.styl"
 
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-
 .view
   transition all .3s ease
   -o-transition all .3s ease
@@ -48,4 +36,12 @@ export default {
   -ms-transform translate3d(10px, 0, 0)
   -moz-transform translate3d(10px, 0, 0)
   -webkit-transform translate3d(10px, 0, 0)
+
+body
+  margin 0
+  font-size 10px
+  background url('assets/background.svg') no-repeat center center
+  background-size cover
+  min-height 100%
+  height 100vh
 </style>
