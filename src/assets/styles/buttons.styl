@@ -1,0 +1,17 @@
+@import "./variables"
+
+.Btn
+  background transparent
+  font 200 13px $rubik
+  border-radius 3px
+  transition all ease .5s
+
+.Btn__clean--blue
+  @extend .Btn
+  border 2px solid $blue-color
+  color $blue-color
+  min-width 100px
+  padding 20px 25px
+  &:hover
+    background $blue-color
+    color #fff
