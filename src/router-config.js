@@ -1,6 +1,7 @@
 import Login from './spa/Login';
 import Home from './spa/Home';
 import Dash from './spa/Dash/Dash';
+import GeneralNotifications from './spa/GeneralNotifications';
 import Goal from './spa/Goal/Goal';
 import Notifications from './spa/Goal/Notifications';
 import NewGoal from './spa/Goal/NewGoal';
@@ -30,6 +31,10 @@ export const routes = [
       {
         path: 'goal/:id/notifications',
         component: Notifications,
+      },
+      {
+        path: '/notifications',
+        component: GeneralNotifications,
       },
     ],
   },
