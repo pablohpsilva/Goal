@@ -23,23 +23,30 @@
     .Text
       color $trd-color
       font 300 14px $rubik
+
+    .Icon
+      color $trd-color
+      font-size 26px
 </style>
 
 <template lang="html">
   <ul class="GoalNotifications">
     <li class="GoalNotification">
+      <i class="icon-list GoalNotification__Icon"></i>
       <h3 class="GoalNotification__Title">Simple notification</h3>
       <p class="GoalNotification__Text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
       </p>
     </li>
     <li class="GoalNotification">
+      <i class="icon-list GoalNotification__Icon"></i>
       <h3 class="GoalNotification__Title">Simple notification</h3>
       <p class="GoalNotification__Text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
       </p>
     </li>
     <li class="GoalNotification">
+      <i class="icon-list GoalNotification__Icon"></i>
       <h3 class="GoalNotification__Title">Simple notification</h3>
       <p class="GoalNotification__Text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
