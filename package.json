@@ -14,10 +14,6 @@
   },
   "dependencies": {
     "vue": "^2.0.1",
-    "vue-resource": "^1.0.3",
-    "vue-router": "^2.0.1",
-    "vuex": "^2.0.0",
-    "vuex-router-sync": "next"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -43,6 +39,7 @@
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
+    "fastclick": "^1.0.6",
     "file-loader": "^0.9.0",
     "function-bind": "^1.0.2",
     "html-webpack-plugin": "^2.8.1",
@@ -58,8 +55,10 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
+    "lodash": "^4.16.4",
     "lolex": "^1.4.0",
     "mocha": "^3.1.0",
+    "moment": "^2.15.1",
     "nightwatch": "^0.9.8",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
@@ -70,7 +69,11 @@
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
     "vue-loader": "^9.4.0",
+    "vue-resource": "^1.0.3",
+    "vue-router": "^2.0.1",
     "vue-style-loader": "^1.0.0",
+    "vuex": "^2.0.0",
+    "vuex-router-sync": "next"
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
