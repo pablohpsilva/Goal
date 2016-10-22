@@ -1,5 +1,6 @@
 import Login from './spa/Login';
 import Home from './spa/Home';
+import Goal from './spa/Goal/Goal';
 
 /* eslint-disable import/prefer-default-export */
 export const routes = [
@@ -15,7 +16,7 @@ export const routes = [
       {
         path: 'goal',
         name: 'goal',
-        component: Home,
+        component: Goal,
         children: [
           {
             path: ':id',
