@@ -103,6 +103,7 @@
 
 <template lang="html">
   <div class="Goal">
+    <action-bar></action-bar>
     <h1 class="Goal__Title">
       <i class="Goal__Title-Icon--trip"></i>
       New York Trip
@@ -144,6 +145,8 @@
 </template>
 
 <script>
+import ActionBar from '../../shared-components/ActionBar';
+
 export default {
   props: {},
   vuex: {},
@@ -152,7 +155,9 @@ export default {
   },
   computed: {},
   watch: {},
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };
