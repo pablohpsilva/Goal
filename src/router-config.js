@@ -3,6 +3,7 @@ import Home from './spa/Home';
 import Dash from './spa/Dash/Dash';
 import Goal from './spa/Goal/Goal';
 import Notifications from './spa/Goal/Notifications';
+import EditGoal from './spa/Goal/Edit';
 import NewGoal from './spa/Goal/NewGoal';
 
 import database from './vuex/database';
@@ -30,6 +31,10 @@ export const routes = [
       {
         path: 'goal/:id/notifications',
         component: Notifications,
+      },
+      {
+        path: 'goal/:id/edit',
+        component: EditGoal,
       },
     ],
   },
