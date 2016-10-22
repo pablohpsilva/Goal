@@ -19,6 +19,9 @@ export default {
 };
 </script>
 
+<style lang="less">
+  @import "assets/styles/vendor/vue2-animate/src/vue2-animate.less";
+</style>
 <style lang="stylus">
 @import "./assets/styles/style.styl"
 
@@ -44,4 +47,6 @@ body
   background-size cover
   min-height 100%
   height 100vh
+  *
+    box-sizing border-box
 </style>

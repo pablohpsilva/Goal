@@ -51,7 +51,7 @@ export default {
     .logo
       flex-basis(70%)
       img
-        height 2em
+        height 3em
         float left
         padding-top 10px
     .balance
