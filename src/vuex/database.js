@@ -26,7 +26,7 @@ export default {
       auto_compaction: true,
     };
 
-    for (let index = 0, total = adaptersFallback.length; index < total; index++) {
+    for (let index = 0, total = adaptersFallback.length; index < total; index += 1) {
       persistDBOptions.adapter = adaptersFallback[index];
       this.database = new PouchDB(pouchDBName, persistDBOptions);
       if (this.database) {

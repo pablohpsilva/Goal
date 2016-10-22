@@ -1,11 +1,14 @@
 import Login from './spa/Login';
 import Home from './spa/Home';
 
+import database from './vuex/database';
+
 /* eslint-disable import/prefer-default-export */
 export const routes = [
   {
     path: '/',
     component: Home,
+    redirect: '/goal',
     children: [
       {
         path: 'dash',
@@ -36,3 +39,19 @@ export const routes = [
     component: Login,
   },
 ];
+
+const createDatabaseIfNotExists = () => {
+  database.getDoc('goals')
+    .catch(() => database.persist());
+};
+
+export const routesConfig = (to) => {
+  if (to.path === '/logout') {
+    database.destroyDatabase()
+      .then(() => {
+        to.path = '/login';
+      });
+  } else {
+    createDatabaseIfNotExists();
+  }
+};
