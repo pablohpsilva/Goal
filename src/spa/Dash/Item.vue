@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="Item__wrapper">
     <div class="Item__icon">
-      <i>icon</i>
+      <i class="icon-alert"></i>
     </div>
     <div class="Item__info">
       <span>Worldtrip</span>
@@ -57,11 +57,12 @@ export default {
       border-bottom: 1px solid rgba($trd-color, 0.6)
       color $trd-color
       font 400 1.5em/1em $rubik
-      padding 4vh 25px
+      padding 4vh 15px
       &:hover
         background rgba($trd-color, 0.6);
     .icon
       flex-basis(15%)
+      font-size 2em
       text-align center
     .info
       flex-basis(70%)
