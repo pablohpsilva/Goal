@@ -2,11 +2,15 @@
   <div id="app">
     <img src="./assets/logo.png">
     <hello></hello>
+    <router-view class="view"
+                 transition="test"
+                 transition-mode="out-in"
+                 keep-alive></router-view>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import Hello from './shared-components/Hello';
 
 export default {
   name: 'app',
