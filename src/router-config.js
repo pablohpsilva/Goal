@@ -8,7 +8,6 @@ export const routes = [
   {
     path: '/',
     component: Home,
-    redirect: '/goal',
     children: [
       {
         path: 'dash',
