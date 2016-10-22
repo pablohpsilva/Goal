@@ -10,9 +10,17 @@ import App from './App';
 import VuexStore from './vuex/store';
 import { routes } from './router-config';
 
+import {
+    vDate,
+    vMoney,
+} from './common/directives/masks';
+
 Vue.use(Vuex);
 Vue.use(Router);
 Vue.use(VueResource);
+
+Vue.directive('date', vDate);
+Vue.directive('money', vMoney);
 
 /* eslint-disable no-new */
 const store = new Vuex.Store(VuexStore);

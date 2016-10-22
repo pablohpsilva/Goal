@@ -5,17 +5,32 @@
         {{ title }}
       </div>
       <div class="RegisterModal__close"
-          @click.stop="closeModal">
+          v-on:click="closemodal">
         <i class="icon-cancel"></i>
       </div>
     </div>
     <div class="RegisterModal__content">
-      <input class="RegisterModal__textinput" type="text" name="name" placeholder="Name">
-      <input class="RegisterModal__textinput" type="text" name="name" placeholder="Date">
-      <input class="RegisterModal__textinput" type="text" name="name" placeholder="Description">
+      <input class="RegisterModal__textinput"
+          type="text"
+          name="name"
+          placeholder="Name"
+          maxlength="50">
+      <input class="RegisterModal__textinput"
+          type="text"
+          name="date"
+          v-date
+          placeholder="Date">
+      <input class="RegisterModal__textinput"
+          type="text"
+          name="description"
+          placeholder="Description"
+          maxlength="250">
     </div>
     <div class="RegisterModal__footer">
-      <input class="Btn__clean--white" type="button" name="name" v-bind:value="title">
+      <input class="Btn__clean--white"
+          type="button"
+          name="name"
+          value="Save">
     </div>
   </div>
 </template>
@@ -38,8 +53,8 @@ export default {
   computed: {},
   components: {},
   methods: {
-    closeModal() {
-      this.$emit('closeModal');
+    closemodal() {
+      this.$emit('closemodal');
     },
   },
   mounted() {},

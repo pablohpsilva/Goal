@@ -10,7 +10,7 @@
             'Navigation__text--green': positiveBalance,
             'Navigation__text--red': !positiveBalance
           }">
-          $ {{ balance }}
+          {{ formatedBalance }}
         </span>
       </p>
     </div>
@@ -18,6 +18,8 @@
 </template>
 
 <script type="text/babel">
+import { formatCurrency } from '../common/functions/fun';
+
 export default {
   props: {
     balance: {
@@ -31,6 +33,9 @@ export default {
   computed: {
     positiveBalance() {
       return this.balance >= 0;
+    },
+    formatedBalance() {
+      return formatCurrency(this.balance, '$');
     },
   },
   components: {},

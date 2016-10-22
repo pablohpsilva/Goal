@@ -49,4 +49,6 @@ body
   height 100vh
   *
     box-sizing border-box
+    &:focus
+      outline: none;
 </style>
