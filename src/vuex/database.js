@@ -1,4 +1,5 @@
-import PouchDB from 'pouchdb';
+const PouchDB = require('pouchdb-browser')
+  .plugin(require('pouchdb-adapter-idb'));
 
 // import memory from 'pouchdb/extras/memory';
 

@@ -1,0 +1,153 @@
+/* -----
+Forms
+----- */
+placeholder(element)
+    {element}::-webkit-input-placeholder
+        {block}
+
+    {element}::-moz-placeholder
+        {block}
+
+    {element}:-ms-input-placeholder
+        {block}
+
+/* -----
+Flexbox
+----- */
+flex()
+    display -ms-flexbox
+    display -webkit-box
+    display -webkit-flex
+    display flex
+
+flex-direction(val)
+    -webkit-flex-direction val
+    -ms-flex-direction     val
+    flex-direction         val
+
+flex-wrap(val)
+    -webkit-flex-wrap val
+    -ms-flex-wrap     val
+    flex-wrap         val
+
+flex-justify(val)
+    -webkit-justify-content val
+
+    if val is 'flex-start'
+        -ms-flex-line-pack start
+    else if val is 'flex-end'
+        -ms-flex-line-pack end
+    else if val is 'space-between'
+        -ms-flex-line-pack justify
+    else if val is 'space-around'
+        -ms-flex-line-pack distribute
+    else
+        -ms-flex-pack val
+
+    justify-content val
+
+flex-align-items(val)
+    -webkit-align-items val
+
+    if val is 'flex-end'
+        -ms-flex-align end
+    if val is 'flex-start'
+        -ms-flex-align start
+    else
+        -ms-flex-align val
+
+    align-items val
+
+flex-align-self(val)
+    -webkit-align-self val
+
+    if val is 'flex-end'
+        -ms-flex-item-align end
+    if val is 'flex-start'
+        -ms-flex-item-align start
+    else
+        -ms-flex-item-align val
+
+    align-self val
+
+flex-align-content(val)
+    -webkit-align-content flex-start
+
+    if val is 'flex-start'
+        -ms-flex-line-pack start
+    else if val is 'flex-end'
+        -ms-flex-line-pack end
+    else if val is 'space-between'
+        -ms-flex-line-pack justify
+    else if val is 'space-around'
+        -ms-flex-line-pack distribute
+    else
+        -ms-flex-line-pack val
+
+    align-content flex-start
+
+flex-basis(val)
+    -webkit-flex-basis val
+    flex-basis         val
+
+flex-order(val)
+    -webkit-order  val
+    -ms-flex-order val
+    order          val
+
+/* -----
+Element modifiers
+----- */
+square(val)
+    width  val
+    height val
+
+text-overflow()
+    overflow      hidden
+    white-space   nowrap
+    text-overflow ellipsis
+
+/** -----
+Transform
+----- */
+transform()
+    -webkit-transform arguments
+    -moz-transform    arguments
+    transform         arguments
+
+/** -----
+Transitions
+----- */
+transition()
+    -webkit-transition arguments
+    transition         arguments
+
+
+/** -----
+Animation
+----- */
+keyframes(name)
+    @-webkit-keyframes name
+        {block}
+
+    @keyframes name
+        {block}
+
+/** -----
+Range
+----- */
+rangeThumb()
+    &::-webkit-slider-thumb
+        {block}
+    &::-moz-range-thumb
+        {block}
+    &::-ms-thumb
+        {block}
+
+rangeTrack()
+    &::-webkit-slider-runnable-track
+        {block}
+    &::-moz-range-track
+        {block}
+    &::-ms-track
+        {block}
