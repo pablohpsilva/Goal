@@ -2,6 +2,7 @@ import Login from './spa/Login';
 import Home from './spa/Home';
 import Dash from './spa/Dash/Dash';
 import Goal from './spa/Goal/Goal';
+import Notification from './spa/Notification/Notification';
 
 import database from './vuex/database';
 
@@ -26,6 +27,11 @@ export const routes = [
             component: Home,
           },
         ],
+      },
+      {
+        path: 'notifications',
+        name: 'notifications',
+        component: Notification,
       },
     ],
   },
