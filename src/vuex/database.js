@@ -22,7 +22,7 @@ export default {
 
   persist() {
     const persistDBOptions = {
-      adapter: 'idb',
+      adapter: 'websql',
       auto_compaction: true,
     };
 
