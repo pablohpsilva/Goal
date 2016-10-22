@@ -28,9 +28,10 @@ export default {
     .actions
       flex()
       flex-justify(space-between)
-      padding 5vh
+      padding 0 5vh
       list-style none
       font-size 4.5em
+      margin 15px 0px
     .action
       color #b9b9b9
       cursor pointer
@@ -38,6 +39,8 @@ export default {
       &:hover
         color #51b9e5
         transition color 0.3s ease
+      &:visited
+        color #b9b9b9
   .active
     color #51b9e5
     cursor pointer

@@ -1,5 +1,6 @@
 <template lang="html">
   <header class="Navigation__wrapper">
+    <action-bar></action-bar>
     <div class="Navigation__logo">
       <img src="../assets/grow.svg" alt="" />
     </div>
@@ -18,6 +19,8 @@
 </template>
 
 <script type="text/babel">
+import ActionBar from '../shared-components/ActionBar';
+
 export default {
   props: {
     balance: {
@@ -33,7 +36,9 @@ export default {
       return this.balance >= 0;
     },
   },
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };

@@ -2,7 +2,8 @@ import Login from './spa/Login';
 import Home from './spa/Home';
 import Dash from './spa/Dash/Dash';
 import Goal from './spa/Goal/Goal';
-import Notification from './spa/Notification/Notification';
+import Notifications from './spa/Goal/Notifications';
+import NewGoal from './spa/Goal/NewGoal';
 
 import database from './vuex/database';
 
@@ -20,18 +21,15 @@ export const routes = [
       {
         path: 'goal',
         name: 'goal',
-        component: Goal,
-        children: [
-          {
-            path: ':id',
-            component: Home,
-          },
-        ],
+        component: NewGoal,
       },
       {
-        path: 'notifications',
-        name: 'notifications',
-        component: Notification,
+        path: 'goal/:id',
+        component: Goal,
+      },
+      {
+        path: 'goal/:id/notifications',
+        component: Notifications,
       },
     ],
   },
