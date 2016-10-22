@@ -1,22 +1,32 @@
 <style lang="stylus">
   +prefix-classes('Goal__')
     .Title
-      &-Icon
-        &--trip
+      font 600 21px $rubik
+
+      /*&-Icon*/
+        /*&--trip*/
 
     .Status
       &-Title
-      &-Graphic
+        font 400 $rubik 18px
 
-    .SubGoals
+      /*&-Graphic*/
+
+    /*.SubGoals*/
+
     .SubGoal
-      &-description
-        &--complete
+      &-Description
+        color $trd-color
+        font 600 $rubik 21px
 
-      &-value
-
-      &-percentage
         &--complete
+          @extend .SubGoal-Description
+          color $sec-color
+
+      /*&-Value*/
+
+      /*&-Percentage*/
+        /*&--complete*/
 
     .Bar
       height 100vh
@@ -41,19 +51,19 @@
 
     <ul class="Goal__SubGoals">
       <li class="Goal__SubGoal">
-        <span class="Goal__SubGoal-description--complete">Passport</span>
-        <span class="Goal__SubGoal-value">$ 200.00</span>
-        <span class="Goal__SubGoal-percentage--complete">100%</span>
+        <span class="Goal__SubGoal-Description--complete">Passport</span>
+        <span class="Goal__SubGoal-Value">$ 200.00</span>
+        <span class="Goal__SubGoal-Percentage--complete">100%</span>
       </li>
       <li class="Goal__SubGoal">
-        <span class="Goal__SubGoal-description">Tickets</span>
-        <span class="Goal__SubGoal-value">$ 3,000.00</span>
-        <span class="Goal__SubGoal-percentage">75%</span>
+        <span class="Goal__SubGoal-Description">Tickets</span>
+        <span class="Goal__SubGoal-Value">$ 3,000.00</span>
+        <span class="Goal__SubGoal-Percentage">75%</span>
       </li>
       <li class="Goal__SubGoal">
-        <span class="Goal__SubGoal-description">Hotel</span>
-        <span class="Goal__SubGoal-value">$ 1,000.00</span>
-        <span class="Goal__SubGoal-percentage">45%</span>
+        <span class="Goal__SubGoal-Description">Hotel</span>
+        <span class="Goal__SubGoal-Value">$ 1,000.00</span>
+        <span class="Goal__SubGoal-Percentage">45%</span>
       </li>
     </ul>
 
