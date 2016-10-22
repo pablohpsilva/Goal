@@ -41,6 +41,6 @@ export default {
       flex-justify(space-around)
       padding 5vh 15px
   .Btn__clean--blue
-    font-size 1.5em
+    font-size 1.3em
     width 10em
 </style>
