@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="">
     <navigation></navigation>
+    <transition name="fade">
+      <register-modal v-show="open" v-bind:open.sync="open"></register-modal>
+    </transition>
     <div class="Dash__actions">
       <button class="Btn__clean--blue" type="button" name="button">
         Add goal
@@ -16,14 +19,18 @@
 <script type="text/babel">
 import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
+import RegisterModal from './RegisterModal';
 
 export default {
   data() {
-    return {};
+    return {
+      open: true,
+    };
   },
   computed: {},
   components: {
     Item,
+    RegisterModal,
     Navigation,
   },
   methods: {},
@@ -43,4 +50,10 @@ export default {
   .Btn__clean--blue
     font-size 1.3em
     width 10em
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
 </style>
