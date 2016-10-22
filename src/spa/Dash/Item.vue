@@ -11,7 +11,8 @@
             'Item__red': colorInterval === 'red',
             'Item__yellow': colorInterval === 'yellow',
             'Item__green': colorInterval === 'green',
-          }"></div>
+          }"
+          v-bind:style="{ 'width': percentage + '%' }"></div>
     </div>
     <div class="Item__percentage">
       70%
@@ -23,7 +24,7 @@
 export default {
   data() {
     return {
-      percentage: 0.0,
+      percentage: 30.0,
     };
   },
   computed: {
@@ -31,10 +32,10 @@ export default {
       if (this.percentage < 5) {
         return 'gray';
       }
-      if (this.percentage >= 5 && this.percentage < 15) {
+      if (this.percentage >= 5 && this.percentage < 35) {
         return 'red';
       }
-      if (this.percentage >= 15 && this.percentage < 65) {
+      if (this.percentage >= 35 && this.percentage < 65) {
         return 'yellow';
       }
       return 'green';

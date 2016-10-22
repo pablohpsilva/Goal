@@ -141,6 +141,7 @@
 
 <template lang="html">
   <div class="Goal">
+    <action-bar></action-bar>
     <div class="Goal__Header">
       <router-link class="Goal__Btn--back"
                    :to="{ name: 'dash' }">
@@ -189,6 +190,8 @@
 </template>
 
 <script>
+import ActionBar from '../../shared-components/ActionBar';
+
 export default {
   props: {},
   vuex: {},
@@ -197,7 +200,9 @@ export default {
   },
   computed: {},
   watch: {},
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };

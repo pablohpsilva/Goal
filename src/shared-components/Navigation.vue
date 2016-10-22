@@ -1,5 +1,6 @@
 <template lang="html">
   <header class="Navigation__wrapper">
+    <action-bar></action-bar>
     <div class="Navigation__logo">
       <img src="../assets/grow.svg" alt="" />
     </div>
@@ -10,7 +11,7 @@
             'Navigation__text--green': positiveBalance,
             'Navigation__text--red': !positiveBalance
           }">
-          $ {{ balance }}
+          {{ formatedBalance }}
         </span>
       </p>
     </div>
@@ -18,6 +19,9 @@
 </template>
 
 <script type="text/babel">
+import ActionBar from '../shared-components/ActionBar';
+import { formatCurrency } from '../common/functions/fun';
+
 export default {
   props: {
     balance: {
@@ -32,8 +36,13 @@ export default {
     positiveBalance() {
       return this.balance >= 0;
     },
+    formatedBalance() {
+      return formatCurrency(this.balance, '$');
+    },
   },
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };

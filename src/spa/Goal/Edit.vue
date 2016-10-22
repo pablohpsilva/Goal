@@ -3,7 +3,7 @@
   @import "../../assets/styles/mixins"
 
   .EditGoal
-    padding 0 30px
+    padding 40px 30px
 
   +prefix-classes('EditGoal__')
     .Label
@@ -70,8 +70,10 @@
 </style>
 
 <template lang="html">
-  <div class="EditGoal">
-    <form>
+  <div>
+    <action-bar></action-bar>
+
+    <form class="EditGoal">
       <label class="EditGoal__Label" for="name">Name</label>
       <input id="name" class="EditGoal__Input" type="text" />
 
@@ -91,11 +93,13 @@
       </div>
 
       <button class="EditGoal__Btn--submit" type="submit">Save</button>
-    </form
+    </form>
   </div>
 </template>
 
 <script>
+import ActionBar from '../../shared-components/ActionBar';
+
 export default {
   props: {},
   vuex: {},
@@ -104,7 +108,9 @@ export default {
   },
   computed: {},
   watch: {},
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };
