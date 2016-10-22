@@ -1,6 +1,7 @@
 import Login from './spa/Login';
 import Home from './spa/Home';
 import Dash from './spa/Dash/Dash';
+import Goal from './spa/Goal/Goal';
 
 import database from './vuex/database';
 
@@ -18,7 +19,7 @@ export const routes = [
       {
         path: 'goal',
         name: 'goal',
-        component: Home,
+        component: Goal,
         children: [
           {
             path: ':id',

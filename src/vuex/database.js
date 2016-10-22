@@ -1,12 +1,11 @@
-const PouchDB = require('pouchdb-browser')
-  .plugin(require('pouchdb-adapter-idb'));
+import PouchDB from 'pouchdb';
 
 // import memory from 'pouchdb/extras/memory';
 
 const pouchDBName = 'goaldatabase',
   // pouchDBDefaultOptions = { adapter: 'memory', auto_compaction: true },
   pouchDBDefaultOptions = {
-    adapter: 'idb',
+    adapter: 'websql',
     auto_compaction: true,
   },
   adaptersFallback = [
@@ -23,7 +22,7 @@ export default {
 
   persist() {
     const persistDBOptions = {
-      adapter: 'idb',
+      adapter: 'websql',
       auto_compaction: true,
     };
 
