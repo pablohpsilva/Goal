@@ -1,14 +1,25 @@
 <template lang="html">
   <div class="">
-    <navigation></navigation>
-    <transition name="fade">
-      <register-modal v-show="open" v-bind:open.sync="open"></register-modal>
+    <navigation v-bind:balance="balance"></navigation>
+    <transition name="zoom"
+        enter-active-class="zoomIn"
+        leave-active-class="zoomOut">
+      <register-modal v-show="open"
+          v-bind:open="open"
+          v-bind:title="title"
+          v-on:closemodal="closeModal"></register-modal>
     </transition>
     <div class="Dash__actions">
-      <button class="Btn__clean--blue" type="button" name="button">
+      <button class="Btn__clean--blue"
+          type="button"
+          name="button"
+          v-on:click.stop="openModal('Add goal')">
         Add goal
       </button>
-      <button class="Btn__clean--blue" type="button" name="button">
+      <button class="Btn__clean--blue"
+          type="button"
+          name="button"
+          v-on:click.stop="openModal('Assign revenue')">
         Assign revenue
       </button>
     </div>
@@ -24,7 +35,9 @@ import RegisterModal from './RegisterModal';
 export default {
   data() {
     return {
-      open: true,
+      balance: 12099.50,
+      open: false,
+      title: 'Add goal',
     };
   },
   computed: {},
@@ -33,7 +46,15 @@ export default {
     RegisterModal,
     Navigation,
   },
-  methods: {},
+  methods: {
+    closeModal() {
+      this.open = false;
+    },
+    openModal(title) {
+      this.title = title;
+      this.open = true;
+    },
+  },
   mounted() {},
 };
 </script>

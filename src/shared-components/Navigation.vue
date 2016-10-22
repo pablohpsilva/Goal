@@ -11,7 +11,7 @@
             'Navigation__text--green': positiveBalance,
             'Navigation__text--red': !positiveBalance
           }">
-          $ {{ balance }}
+          {{ formatedBalance }}
         </span>
       </p>
     </div>
@@ -20,6 +20,7 @@
 
 <script type="text/babel">
 import ActionBar from '../shared-components/ActionBar';
+import { formatCurrency } from '../common/functions/fun';
 
 export default {
   props: {
@@ -34,6 +35,9 @@ export default {
   computed: {
     positiveBalance() {
       return this.balance >= 0;
+    },
+    formatedBalance() {
+      return formatCurrency(this.balance, '$');
     },
   },
   components: {
@@ -56,7 +60,7 @@ export default {
     .logo
       flex-basis(70%)
       img
-        height 2em
+        height 3em
         float left
         padding-top 10px
     .balance

@@ -1,18 +1,37 @@
 <style lang="stylus">
   @import "../../assets/styles/variables"
+  @import "../../assets/styles/mixins"
+
   .Goal
     padding 0 25px
 
   +prefix-classes('Goal__')
+    .Header
+      flex()
+      flex-justify(space-between)
+      flex-align-items(center)
+      margin-bottom 30px
+
+    .Btn--back
+      background none
+      border none
+      color $trd-color
+      text-decoration none
+
+    .Icon--back
+      color $primary-color
+      font-size 44px
+
     .Title
       color $trd-color
       font 600 21px $rubik
       margin-top 0
 
     .Status
-      display flex
-      justify-content space-between
-      align-items center
+      flex()
+      flex-justify(space-between)
+      flex-align-items(center)
+      margin-bottom 30px
 
       &-Title
         color $trd-color
@@ -35,15 +54,15 @@
       position relative
 
       &::before
-        background rgba($primary-color, .5)
-        border-radius 50%
+        background url("../../assets/icons/IconGrowBlue.svg") no-repeat
+        background-size 18px
         content ""
         display block
-        height 16px
+        height 18px
         left 0
         position absolute
         top calc(50% - 8px)
-        width 16px
+        width 18px
 
       &::after
         background-color $trd-color
@@ -57,6 +76,12 @@
 
       &:not(:last-child)
         margin-bottom 30px
+
+      &--complete
+        @extend .Goal__SubGoal
+
+        &::before
+          background-image url("../../assets/icons/IconGrow.svg")
 
       &-Description
         color $trd-color
@@ -74,10 +99,23 @@
       &-Percentage
         color $trd-color
         font 400 17px $rubik
+        padding-right 28px
+        position relative
 
         &--complete
           @extend .Goal__SubGoal-Percentage
           color $sec-color
+
+          &::before
+            background url("../../assets/icons/Heart.svg") no-repeat
+            background-size 25px
+            content ""
+            display block
+            height 25px
+            position absolute
+            right 0
+            top -9px
+            width 25px
 
     .Bar
       align-items flex-end
@@ -104,10 +142,17 @@
 <template lang="html">
   <div class="Goal">
     <action-bar></action-bar>
-    <h1 class="Goal__Title">
-      <i class="Goal__Title-Icon--trip"></i>
-      New York Trip
-    </h1>
+    <div class="Goal__Header">
+      <router-link class="Goal__Btn--back"
+                   :to="{ name: 'dash' }">
+                   <i class="icon-left Goal__Icon--back"></i>
+      </router-link>
+
+      <h1 class="Goal__Title">
+        <i class="icon-worldtrip"></i>
+        New York Trip
+      </h1>
+    </div>
 
     <div class="Goal__Status">
       <h3 class="Goal__Status-Title">Faltam $ 1.999,00 para atingir sua meta</h3>
@@ -115,7 +160,7 @@
     </div>
 
     <ul class="Goal__SubGoals">
-      <li class="Goal__SubGoal">
+      <li class="Goal__SubGoal--complete">
         <span class="Goal__SubGoal-Description--complete">
           Passport
           <span class="Goal__SubGoal-Value">$ 200.00</span>
@@ -139,7 +184,7 @@
     </ul>
 
     <div class="Goal__Bar">
-      <div class="Goal__Bar-intern--complete" style="height: 75vh"></div>
+      <div class="Goal__Bar-intern" style="height: 75vh"></div>
     </div>
   </div>
 </template>
