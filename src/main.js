@@ -19,7 +19,7 @@ const store = new Vuex.Store(VuexStore);
 
 const router = new Router({
   routes,
-  history: true,
+  mode: 'history',
   saveScrollPosition: true,
 });
 
