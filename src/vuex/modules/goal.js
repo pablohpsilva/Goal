@@ -5,13 +5,13 @@ import {
 const mutations = {
   [GOAL_OBJECT](state, data) {
     if (data && typeof data === 'object') {
-      state.category = data;
+      state.goal = data;
     }
   },
 };
 
 const state = {
-  category: {
+  goal: {
     name: '',
     date: null,
     description: '',
