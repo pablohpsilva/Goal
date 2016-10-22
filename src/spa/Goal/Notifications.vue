@@ -7,13 +7,11 @@
     padding 0
 
   .GoalNotification
-    border-right 5px rgba(#FFF, 0) solid
     padding 10px 25px
     transition background .3s ease
 
     &:hover
       background-color #F2F1F1
-      border-right-color $danger-color
       transition background .3s ease
 
   +prefix-classes('GoalNotification__')
