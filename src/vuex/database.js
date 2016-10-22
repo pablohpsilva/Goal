@@ -5,7 +5,7 @@ import PouchDB from 'pouchdb';
 const pouchDBName = 'goaldatabase',
   // pouchDBDefaultOptions = { adapter: 'memory', auto_compaction: true },
   pouchDBDefaultOptions = {
-    adapter: 'idb',
+    adapter: 'websql',
     auto_compaction: true,
   },
   adaptersFallback = [
