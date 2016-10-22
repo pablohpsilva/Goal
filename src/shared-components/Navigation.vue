@@ -33,15 +33,15 @@ export default {
   @import "../assets/styles/mixins"
 
   +prefix-classes('Navigation__')
-    font 400 1em/1em Rubik, sans-serif;
     .wrapper
-      padding 0 20px
       flex()
+      padding 0 20px
+      font 400 1em/1em Rubik, sans-serif
     .logo
       flex-basis(70%)
       img
-        height: 2em;
-        float: left;
+        height 2em
+        float left
     .balance
       flex-basis(30%)
 </style>
