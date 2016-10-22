@@ -5,7 +5,6 @@ import goal from './modules/goal';
 // functions that do not depend on the instance itself, they can
 // be easily tested or even hot-reloaded (see counter-hot example).
 
-/* eslint-disable no-new */
 export default {
   modules: {
     goal,
