@@ -46,12 +46,12 @@ export default {
   +prefix-classes('Navigation__')
     .wrapper
       flex()
-      padding 40px 25px 0px 25px
+      padding 20px 25px 0px 25px
       font 400 1em/1em Rubik, sans-serif
     .logo
       flex-basis(70%)
       img
-        height 5em
+        height 2em
         float left
         padding-top 10px
     .balance
@@ -60,7 +60,7 @@ export default {
         text-align right
         span
           display block
-          font 400 3em/1em $rubik
+          font 400 1.5em/1em $rubik
     .text--gray
       color $trd-color
     .text--green
