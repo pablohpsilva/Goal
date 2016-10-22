@@ -13,15 +13,18 @@
       <input class="RegisterModal__textinput"
           type="text"
           name="name"
-          placeholder="Name">
+          placeholder="Name"
+          maxlength="50">
       <input class="RegisterModal__textinput"
           type="text"
-          name="name"
+          name="date"
+          v-date
           placeholder="Date">
       <input class="RegisterModal__textinput"
           type="text"
-          name="name"
-          placeholder="Description">
+          name="description"
+          placeholder="Description"
+          maxlength="250">
     </div>
     <div class="RegisterModal__footer">
       <input class="Btn__clean--white"

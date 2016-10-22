@@ -30,19 +30,19 @@ export const vHour = {
 };
 
 export const vDate = {
-  bind() {
-    new Cleave(this.el, date);
+  bind(el) {
+    new Cleave(el, date);
   },
 };
 
 export const vPhone = {
-  bind() {
-    new Cleave(this.el, phone);
+  bind(el) {
+    new Cleave(el, phone);
   },
 };
 
 export const vMoney = {
-  bind() {
-    new Cleave(this.el, money);
+  bind(el) {
+    new Cleave(el, money);
   },
 };
