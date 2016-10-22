@@ -2,15 +2,13 @@
   @import "../../assets/styles/variables"
   @import "../../assets/styles/mixins"
 
-  .Goal
-    padding 0 25px
-
   +prefix-classes('Goal__')
     .Header
       flex()
       flex-justify(space-between)
       flex-align-items(center)
       margin-bottom 30px
+      padding 0 25px
 
     .Btn--back
       background none
@@ -32,6 +30,7 @@
       flex-justify(space-between)
       flex-align-items(center)
       margin-bottom 30px
+      padding 0 25px
 
       &-Title
         color $trd-color
@@ -44,7 +43,7 @@
     .SubGoals
       list-style none
       margin 0
-      padding 0
+      padding 0 25px
 
     .SubGoal
       display flex
