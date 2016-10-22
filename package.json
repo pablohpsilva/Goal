@@ -13,7 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "vue": "^2.0.1",
+    "vue": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -73,7 +73,7 @@
     "vue-router": "^2.0.1",
     "vue-style-loader": "^1.0.0",
     "vuex": "^2.0.0",
-    "vuex-router-sync": "next"
+    "vuex-router-sync": "next",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
