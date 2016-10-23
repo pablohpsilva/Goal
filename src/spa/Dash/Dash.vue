@@ -27,9 +27,6 @@
     <div v-if="goalList && goalList.length">
       <item v-for="goal in goalList" v-bind:item="goal"></item>
     </div>
-    <div v-else>
-      Nope.
-    </div>
   </div>
 </template>
 
