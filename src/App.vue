@@ -2,7 +2,9 @@
   <div id="app">
     <loading v-bind:loading="getLoader"></loading>
     <general-notifications></general-notifications>
-    <transition>
+    <transition name="fade"
+        enter-active-class="fadeLeftIn"
+        leave-active-class="fadeLeftOut">
       <keep-alive>
         <router-view class="view"></router-view>
       </keep-alive>
@@ -44,6 +46,8 @@ export default {
   -ms-transition all .3s ease
   -moz-transition all .3s ease
   -wekbit-transition all .3s ease
+  margin: 0 auto;
+  max-width: 800px;
 
 .test-enter, .test-leave
   opacity 0
