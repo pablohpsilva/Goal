@@ -161,15 +161,15 @@
       </div>
     </div>
 
-    <ul class="Goal__SubGoals">
+    <ul class="Goal__SubGoals" v-for="subgoal in subgoalList">
       <li class="Goal__SubGoal--complete">
         <span class="Goal__SubGoal-Description--complete">
-          Passport
-          <span class="Goal__SubGoal-Value">$ 200.00</span>
+          {{ subgoal.name }}
+          <span class="Goal__SubGoal-Value">$ {{ subgoal.value }}</span>
         </span>
         <span class="Goal__SubGoal-Percentage--complete">100%</span>
       </li>
-      <li class="Goal__SubGoal">
+      <!-- <li class="Goal__SubGoal">
         <span class="Goal__SubGoal-Description">
           Tickets
           <span class="Goal__SubGoal-Value">$ 3,000.00</span>
@@ -182,7 +182,7 @@
           <span class="Goal__SubGoal-Value">$ 1,000.00</span>
         </span>
         <span class="Goal__SubGoal-Percentage">45%</span>
-      </li>
+      </li> -->
     </ul>
 
     <div class="Goal__Bar">
@@ -192,14 +192,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import Chart from '../../shared-components/Chart';
 import ActionBar from '../../shared-components/ActionBar';
+
+import {
+  subGoalsResource,
+ } from '../../vuex/resources';
 
 export default {
   props: {},
   vuex: {},
   data() {
     return {
+      subGoalsResource: subGoalsResource(this.$resource),
+      subgoalList: [],
       chartData: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Agost', 'September', 'October', 'November', 'December'],
         datasets: [{
@@ -248,7 +256,26 @@ export default {
     Chart,
     ActionBar,
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    ...mapActions([
+      'setLoader',
+    ]),
+    requestSubgoalList() {
+      const id = 24;
+      this.setLoader(true);
+      this.subGoalsResource.getSubGoals({ id })
+        .then((doc) => {
+          this.subgoalList = doc.data.subGoals;
+          this.setLoader(false);
+        })
+        .catch(() => {
+          this.subgoalList = [];
+          this.setLoader(false);
+        });
+    },
+  },
+  mounted() {
+    this.requestSubgoalList();
+  },
 };
 </script>
