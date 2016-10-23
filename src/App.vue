@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loading v-show="loading"></loading>
     <transition>
       <keep-alive>
         <router-view class="view"></router-view>
@@ -10,11 +11,13 @@
 
 <script>
 import Hello from './shared-components/Hello';
+import Loading from './shared-components/Loading';
 
 export default {
   name: 'app',
   components: {
     Hello,
+    Loading,
   },
 };
 </script>
