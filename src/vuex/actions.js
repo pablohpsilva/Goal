@@ -7,6 +7,7 @@ import * as mutations from './mutation-types';
 export const setUser = ({ commit }, data) => commit(mutations.USER_OBJECT, data);
 
 export const setGoal = ({ commit }, data) => commit(mutations.GOAL_OBJECT, data);
+export const setGoalCollection = ({ commit }, data) => commit(mutations.GOAL_COLLECTION, data);
 
 export const setLoader = ({ commit }, data) => commit(mutations.LOAGING_STATE, data);
 

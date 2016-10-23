@@ -7,6 +7,7 @@ export const loginResource = resource => resource(`${basePath}/login`, {}, login
 
 const goalsActions = {
   getGoals: { method: 'GET', url: `${basePath}/goals/user{/id}` },
+  persistGoal: { method: 'POST', url: `${basePath}/goals/user{/id}` },
   updateGoal: { method: 'PUT', url: `${basePath}/goal/{goalid}/user/{userid}` },
   removeGoal: { method: 'DELETE', url: `${basePath}/goal/{goalid}/user/{userid}` },
   finishGoal: { method: 'PUT', url: `${basePath}/goal/{goalid}/user/{userid}/finish` },
