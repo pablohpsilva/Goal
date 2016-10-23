@@ -3,7 +3,7 @@
   @import "../../assets/styles/mixins"
 
   .EditGoal
-    padding 40px 30px
+    padding 0 30px 30px
 
   +prefix-classes('EditGoal__')
     .Label
@@ -71,6 +71,18 @@
 
 <template lang="html">
   <div>
+    <div class="Goal__Header">
+      <router-link class="Goal__Btn--back"
+                   :to="{ name: 'dash' }">
+                   <i class="icon-left Goal__Icon--back"></i>
+      </router-link>
+
+      <h1 class="Goal__Title">
+        <i class="icon-worldtrip"></i>
+        New York Trip
+      </h1>
+    </div>
+
     <action-bar></action-bar>
 
     <form class="EditGoal">
