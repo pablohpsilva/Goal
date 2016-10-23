@@ -143,7 +143,7 @@
     <action-bar></action-bar>
     <div class="Goal__Header">
       <router-link class="Goal__Btn--back"
-                   :to="{ name: 'dash' }">
+                 :to="{ name: 'dash' }">
                    <i class="icon-left Goal__Icon--back"></i>
       </router-link>
 
@@ -155,7 +155,9 @@
 
     <div class="Goal__Status">
       <h3 class="Goal__Status-Title">Faltam $ 1.999,00 para atingir sua meta</h3>
-      <div class="Goal__Status-Graphic">Gráfico</div>
+      <div class="Goal__Status-Graphic">
+        <chart v-bind:chart-data="chartData" v-bind:options="chartOptions"></chart>
+      </div>
     </div>
 
     <ul class="Goal__SubGoals">
@@ -189,17 +191,60 @@
 </template>
 
 <script>
+import Chart from '../../shared-components/Chart';
 import ActionBar from '../../shared-components/ActionBar';
 
 export default {
   props: {},
   vuex: {},
   data() {
-    return {};
+    return {
+      chartData: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Agost', 'September', 'October', 'November', 'December'],
+        datasets: [{
+          label: 'My First dataset',
+          fill: false,
+          lineTension: 0.4,
+          backgroundColor: 'rgba(75,192,192,0)',
+          borderWidth: 2,
+          borderColor: 'rgba(66, 196, 230, 1)',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: 'rgba(75,192,192,0)',
+          pointBackgroundColor: 'rgba(0,0,0,0)',
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBorderWidth: 2,
+          pointRadius: 0,
+          pointHitRadius: 10,
+          data: [0, 50, 30, -40, 60, -10, 50, -5, 30],
+          spanGaps: false,
+        }],
+      },
+      chartOptions: {
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutSine',
+        },
+        scales: {
+          xAxes: [{
+            display: false,
+          }],
+          yAxes: [{
+            display: false,
+          }],
+        },
+      },
+    };
   },
   computed: {},
   watch: {},
   components: {
+    Chart,
     ActionBar,
   },
   methods: {},

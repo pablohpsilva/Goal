@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "chart.js": "^2.3.0",
     "cleave.js": "^0.7.11",
     "pouchdb": "^6.0.7",
     "vue": "^2.0.1",
@@ -31,7 +32,6 @@
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
     "chai": "^3.5.0",
-    "chart.js": "^2.3.0",
     "chromedriver": "^2.21.2",
     "connect-history-api-fallback": "^1.1.0",
     "cross-spawn": "^4.0.2",
