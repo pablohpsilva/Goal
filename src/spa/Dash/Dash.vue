@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <navigation v-bind:balance="user ? user.balance : 0.0"></navigation>
+    <navigation v-bind:balance="getUser ? getUser.balance : 0.0"></navigation>
     <transition name="zoom"
         enter-active-class="zoomIn"
         leave-active-class="zoomOut">
@@ -33,11 +33,11 @@
 </template>
 
 <script type="text/babel">
+import { mapGetters, mapActions } from 'vuex';
+
 import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
 import RegisterModal from './RegisterModal';
-
-import { setUser } from '../../vuex/actions';
 
 import {
   goalsResource,
@@ -45,14 +45,8 @@ import {
  } from '../../vuex/resources';
 
 export default {
-  vuex: {
-    actions: {
-      setUser,
-    },
-  },
   data() {
     return {
-      balance: 12099.50,
       open: false,
       title: 'Add goal',
       goalResource: goalsResource(this.$resource),
@@ -61,13 +55,21 @@ export default {
       user: null,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      getUser: 'getUserObject',
+    }),
+  },
   components: {
     Item,
     RegisterModal,
     Navigation,
   },
   methods: {
+    ...mapActions([
+      'setUser',
+      'setLoader',
+    ]),
     closeModal() {
       this.open = false;
     },
@@ -93,12 +95,15 @@ export default {
     },
     requestGoalList() {
       const id = 9;
+      this.setLoader(true);
       this.goalResource.getGoals({ id })
         .then((doc) => {
           this.goalList = doc.data.goals;
+          this.setLoader(false);
         })
         .catch(() => {
           this.goalList = [];
+          this.setLoader(false);
         });
     },
   },
