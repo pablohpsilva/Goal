@@ -13,57 +13,83 @@
       background linear-gradient(to right, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
       color #fff
       font 400 10px/1em $rubik
-      height 100vh
       left 0
       min-height 100%
       min-width 100%
-      padding 25px 15px 0 15px
-      position fixed
+      padding 25px 15px
+      position absolute
       top 0
       width 100%
 
-      .header
-        flex()
-        padding-top 25px
+    .header
+      flex()
+      margin-bottom 60px
+      padding-top 25px
 
-        .title
-          flex-basis(90%)
-          font-size 1.6em
-          font-weight 600
-
-        .close
-          flex-basis(10%)
-          font-size 1.5em
-          text-align right
-
-      .content
-        flex()
-        flex-direction(column)
-        padding-top 60px
-
-      .Label
-        color #FFF
+      .title
+        flex-basis(90%)
         font-size 1.6em
         font-weight 600
 
-      .textinput
-        background transparent
-        border 0 solid transparent
-        border-bottom 1px solid #fff
+      .close
+        flex-basis(10%)
+        font-size 1.5em
+        text-align right
+
+    .content
+      flex()
+      flex-direction(column)
+
+    .Label
+      color #FFF
+      font-size 1.6em
+      font-weight 600
+
+    .textinput
+      background transparent
+      border 0 solid transparent
+      border-bottom 1px solid #fff
+      color #fff
+      font 400 1.6em/1em $rubik
+      height 30px
+      margin-bottom 30px
+      padding 0
+
+      &::placeholder
         color #fff
-        font 400 1.6em/1em $rubik
-        height 30px
-        margin-bottom 30px
-        padding 0
 
-        &::placeholder
-          color #fff
+      &:last-child
+        margin-bottom 50px
 
-        &:last-child
-          margin-bottom 50px
+    .footer
+      flex()
 
-      .footer
-        flex()
+  .Btn--subGoal
+    background #FFF
+    border none
+    border-radius 3px
+    color $primary-color
+    font 400 14px $rubik
+    margin-bottom 10px
+    padding 10px
+    position relative
+    width 100%
+
+    &:last-of-type
+      margin-bottom 30px
+
+    &::after
+      background-color $danger-color
+      border-radius 50%
+      color #FFF
+      content "x"
+      display block
+      height 14px
+      line-height 1
+      position absolute
+      right -7px
+      top -7px
+      width 14px
 
   .Btn__clean--white
     background-color #29ABE1
@@ -117,8 +143,42 @@
              maxlength="250"></textarea>
     </div>
 
+    <div class="RegisterModal__content"
+         v-show="addSubGoal">
+      <label class="RegisterModal__Label"
+             for="name_subgoal">Subgoal's name</label>
+      <input id="name_subgoal"
+             v-model="newSubGoal.nameSubgoal"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="50" />
+
+      <label class="RegisterModal__Label"
+             for="value_subgoal">Subgoal's value</label>
+      <input id="value_subgoal"
+             v-model="newSubGoal.valueSubgoal"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="50" />
+
+      <label class="RegisterModal__Label"
+             for="description_subgoal">Subgoal's description</label>
+      <textarea id="description_subgoal"
+                v-model="newSubGoal.descriptionSubgoal"
+                class="RegisterModal__textinput"
+                maxlength="250"></textarea>
+    </div>
+
     <button class="Btn__clean--small"
-            type="button">Add subgoal</button>
+            v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
+            type="button">{{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}</button>
+
+    <button class="Btn--subGoal"
+            v-for="(subGoal, index) in subGoalsList"
+            v-on:click="subGoalsList.splice(index, 1)"
+            type="button">
+      {{ subGoal.name }}
+    </button>
 
     <div class="RegisterModal__footer">
       <button class="Btn__clean--white"
@@ -144,11 +204,35 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      newSubGoal: {
+        nameSubgoal: '',
+        valueSubgoal: '',
+        descriptionSubgoal: '',
+      },
+      addSubGoal: false,
+      subGoalsList: [],
+    };
   },
   computed: {},
   components: {},
   methods: {
+    openSubGoalForm(status) {
+      return status;
+    },
+    addSubGoalsListItem() {
+      this.subGoalsList.push({
+        name: this.newSubGoal.nameSubgoal,
+        value: this.newSubGoal.valueSubgoal,
+        description: this.newSubGoal.descriptionSubgoal,
+      });
+
+      this.newSubGoal = {
+        nameSubgoal: '',
+        valueSubgoal: '',
+        descriptionSubgoal: '',
+      };
+    },
     closemodal() {
       this.$emit('closemodal');
     },
