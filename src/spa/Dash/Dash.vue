@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <navigation v-bind:balance="balance"></navigation>
+    <navigation v-bind:balance="user ? user.balance : 0.0"></navigation>
     <transition name="zoom"
         enter-active-class="zoomIn"
         leave-active-class="zoomOut">
@@ -37,16 +37,28 @@ import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
 import RegisterModal from './RegisterModal';
 
-import { goalsResource } from '../../vuex/resources';
+import { setUser } from '../../vuex/actions';
+
+import {
+  goalsResource,
+  loginResource,
+ } from '../../vuex/resources';
 
 export default {
+  vuex: {
+    actions: {
+      setUser,
+    },
+  },
   data() {
     return {
       balance: 12099.50,
       open: false,
       title: 'Add goal',
       goalResource: goalsResource(this.$resource),
+      signinResource: loginResource(this.$resource),
       goalList: [],
+      user: null,
     };
   },
   computed: {},
@@ -63,6 +75,23 @@ export default {
       this.title = title;
       this.open = true;
     },
+    login() {
+      const user = {
+        user: 'vanhackathon',
+        password: 'code',
+      };
+      this.signinResource.login(user)
+        .then((doc) => {
+          this.user = doc.data;
+          console.warn('this.setUser', this.setUser);
+          this.setUser(doc.data);
+        })
+        .catch((error) => {
+          /* eslint-disable no-console */
+          console.warn('opaaaaaaa', error);
+          /* eslint-enable no-console */
+        });
+    },
     requestGoalList() {
       const id = 9;
       this.goalResource.getGoals({ id })
@@ -75,6 +104,7 @@ export default {
     },
   },
   mounted() {
+    this.login();
     this.requestGoalList();
   },
 };
