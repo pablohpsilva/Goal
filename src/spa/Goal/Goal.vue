@@ -1,18 +1,36 @@
 <style lang="stylus">
   @import "../../assets/styles/variables"
-  .Goal
-    padding 0 25px
+  @import "../../assets/styles/mixins"
 
   +prefix-classes('Goal__')
+    .Header
+      flex()
+      flex-justify(space-between)
+      flex-align-items(center)
+      margin-bottom 30px
+      padding 0 25px
+
+    .Btn--back
+      background none
+      border none
+      color $trd-color
+      text-decoration none
+
+    .Icon--back
+      color $primary-color
+      font-size 44px
+
     .Title
       color $trd-color
       font 600 21px $rubik
       margin-top 0
 
     .Status
-      display flex
-      justify-content space-between
-      align-items center
+      flex()
+      flex-justify(space-between)
+      flex-align-items(center)
+      margin-bottom 30px
+      padding 0 25px
 
       &-Title
         color $trd-color
@@ -25,7 +43,7 @@
     .SubGoals
       list-style none
       margin 0
-      padding 0
+      padding 0 25px
 
     .SubGoal
       display flex
@@ -35,15 +53,15 @@
       position relative
 
       &::before
-        background rgba($primary-color, .5)
-        border-radius 50%
+        background url("../../assets/icons/IconGrowBlue.svg") no-repeat
+        background-size 18px
         content ""
         display block
-        height 16px
+        height 18px
         left 0
         position absolute
         top calc(50% - 8px)
-        width 16px
+        width 18px
 
       &::after
         background-color $trd-color
@@ -57,6 +75,12 @@
 
       &:not(:last-child)
         margin-bottom 30px
+
+      &--complete
+        @extend .Goal__SubGoal
+
+        &::before
+          background-image url("../../assets/icons/IconGrow.svg")
 
       &-Description
         color $trd-color
@@ -74,10 +98,23 @@
       &-Percentage
         color $trd-color
         font 400 17px $rubik
+        padding-right 28px
+        position relative
 
         &--complete
           @extend .Goal__SubGoal-Percentage
           color $sec-color
+
+          &::before
+            background url("../../assets/icons/Heart.svg") no-repeat
+            background-size 25px
+            content ""
+            display block
+            height 25px
+            position absolute
+            right 0
+            top -9px
+            width 25px
 
     .Bar
       align-items flex-end
@@ -103,18 +140,28 @@
 
 <template lang="html">
   <div class="Goal">
-    <h1 class="Goal__Title">
-      <i class="Goal__Title-Icon--trip"></i>
-      New York Trip
-    </h1>
+    <action-bar></action-bar>
+    <div class="Goal__Header">
+      <router-link class="Goal__Btn--back"
+                 :to="{ name: 'dash' }">
+                   <i class="icon-left Goal__Icon--back"></i>
+      </router-link>
+
+      <h1 class="Goal__Title">
+        <i class="icon-worldtrip"></i>
+        New York Trip
+      </h1>
+    </div>
 
     <div class="Goal__Status">
       <h3 class="Goal__Status-Title">Faltam $ 1.999,00 para atingir sua meta</h3>
-      <div class="Goal__Status-Graphic">Gráfico</div>
+      <div class="Goal__Status-Graphic">
+        <chart v-bind:chart-data="chartData" v-bind:options="chartOptions"></chart>
+      </div>
     </div>
 
     <ul class="Goal__SubGoals">
-      <li class="Goal__SubGoal">
+      <li class="Goal__SubGoal--complete">
         <span class="Goal__SubGoal-Description--complete">
           Passport
           <span class="Goal__SubGoal-Value">$ 200.00</span>
@@ -138,21 +185,68 @@
     </ul>
 
     <div class="Goal__Bar">
-      <div class="Goal__Bar-intern--complete" style="height: 75vh"></div>
+      <div class="Goal__Bar-intern" style="height: 75vh"></div>
     </div>
   </div>
 </template>
 
 <script>
+import Chart from '../../shared-components/Chart';
+import ActionBar from '../../shared-components/ActionBar';
+
 export default {
   props: {},
   vuex: {},
   data() {
-    return {};
+    return {
+      chartData: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Agost', 'September', 'October', 'November', 'December'],
+        datasets: [{
+          label: 'My First dataset',
+          fill: false,
+          lineTension: 0.4,
+          backgroundColor: 'rgba(75,192,192,0)',
+          borderWidth: 2,
+          borderColor: 'rgba(66, 196, 230, 1)',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: 'rgba(75,192,192,0)',
+          pointBackgroundColor: 'rgba(0,0,0,0)',
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBorderWidth: 2,
+          pointRadius: 0,
+          pointHitRadius: 10,
+          data: [0, 50, 30, -40, 60, -10, 50, -5, 30],
+          spanGaps: false,
+        }],
+      },
+      chartOptions: {
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutSine',
+        },
+        scales: {
+          xAxes: [{
+            display: false,
+          }],
+          yAxes: [{
+            display: false,
+          }],
+        },
+      },
+    };
   },
   computed: {},
   watch: {},
-  components: {},
+  components: {
+    Chart,
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };

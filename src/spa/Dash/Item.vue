@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="Item__wrapper">
     <div class="Item__icon">
-      <i>icon</i>
+      <i class="icon-alert"></i>
     </div>
     <div class="Item__info">
       <span>Worldtrip</span>
@@ -11,7 +11,8 @@
             'Item__red': colorInterval === 'red',
             'Item__yellow': colorInterval === 'yellow',
             'Item__green': colorInterval === 'green',
-          }"></div>
+          }"
+          v-bind:style="{ 'width': percentage + '%' }"></div>
     </div>
     <div class="Item__percentage">
       70%
@@ -23,7 +24,7 @@
 export default {
   data() {
     return {
-      percentage: 0.0,
+      percentage: 30.0,
     };
   },
   computed: {
@@ -31,10 +32,10 @@ export default {
       if (this.percentage < 5) {
         return 'gray';
       }
-      if (this.percentage >= 5 && this.percentage < 15) {
+      if (this.percentage >= 5 && this.percentage < 35) {
         return 'red';
       }
-      if (this.percentage >= 15 && this.percentage < 65) {
+      if (this.percentage >= 35 && this.percentage < 65) {
         return 'yellow';
       }
       return 'green';
@@ -57,11 +58,12 @@ export default {
       border-bottom: 1px solid rgba($trd-color, 0.6)
       color $trd-color
       font 400 1.5em/1em $rubik
-      padding 4vh 25px
+      padding 4vh 15px
       &:hover
         background rgba($trd-color, 0.6);
     .icon
       flex-basis(15%)
+      font-size 2em
       text-align center
     .info
       flex-basis(70%)

@@ -4,8 +4,20 @@
   background transparent
   font 200 13px $rubik
   border-radius 3px
-  transition all ease .5s
+  cursor pointer
+  transition all ease .3s
+  &:focus
+    outline: none;
 
+.Btn__clean--white
+  @extend .Btn
+  border 2px solid #fff
+  color #fff
+  min-width 100px
+  padding 10px 15px
+  &:hover
+    background $blue-color
+    color #fff
 .Btn__clean--blue
   @extend .Btn
   border 2px solid $blue-color
