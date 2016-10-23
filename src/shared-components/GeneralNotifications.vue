@@ -13,6 +13,8 @@
     transition transform .3s ease
     top 0
     width calc(100% - 40px)
+    max-width 400px
+    z-index 1
 
     &--active
       @extend .GeneralNotifications
@@ -102,6 +104,19 @@
         content "x"
         opacity 0
         line-height .5
+
+  @media (min-width: 900px)
+    .GeneralNotification__RedIcon
+      &::before
+      &::after
+        height 30px
+        left calc(50% - 10px)
+        position absolute
+        top calc(50% - 10px)
+        width 30px
+        transition opacity .6s ease
+      &::before
+        left calc(50% - 15px)
 </style>
 
 <template lang="html">
