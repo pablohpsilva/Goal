@@ -2,15 +2,13 @@
   @import "../../assets/styles/variables"
   @import "../../assets/styles/mixins"
 
-  .Goal
-    padding 0 25px
-
   +prefix-classes('Goal__')
     .Header
       flex()
       flex-justify(space-between)
       flex-align-items(center)
       margin-bottom 30px
+      padding 0 25px
 
     .Btn--back
       background none
@@ -32,6 +30,7 @@
       flex-justify(space-between)
       flex-align-items(center)
       margin-bottom 30px
+      padding 0 25px
 
       &-Title
         color $trd-color
@@ -44,7 +43,7 @@
     .SubGoals
       list-style none
       margin 0
-      padding 0
+      padding 0 25px
 
     .SubGoal
       display flex
@@ -141,6 +140,7 @@
 
 <template lang="html">
   <div class="Goal">
+    <action-bar></action-bar>
     <div class="Goal__Header">
       <router-link class="Goal__Btn--back"
                  :to="{ name: 'dash' }">
@@ -192,6 +192,7 @@
 
 <script>
 import Chart from '../../shared-components/Chart';
+import ActionBar from '../../shared-components/ActionBar';
 
 export default {
   props: {},
@@ -203,8 +204,9 @@ export default {
         datasets: [{
           label: 'My First dataset',
           fill: false,
-          lineTension: 0.3,
+          lineTension: 0.4,
           backgroundColor: 'rgba(75,192,192,0)',
+          borderWidth: 2,
           borderColor: 'rgba(66, 196, 230, 1)',
           borderCapStyle: 'butt',
           borderDash: [],
@@ -243,6 +245,7 @@ export default {
   watch: {},
   components: {
     Chart,
+    ActionBar,
   },
   methods: {},
   mounted() {},

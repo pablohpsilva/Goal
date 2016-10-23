@@ -18,6 +18,7 @@
 </template>
 
 <script type="text/babel">
+import ActionBar from '../shared-components/ActionBar';
 import { formatCurrency } from '../common/functions/fun';
 
 export default {
@@ -38,7 +39,9 @@ export default {
       return formatCurrency(this.balance, '$');
     },
   },
-  components: {},
+  components: {
+    ActionBar,
+  },
   methods: {},
   mounted() {},
 };
