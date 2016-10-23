@@ -61,7 +61,6 @@ export default {
       img
         height 3em
         float left
-        padding-top 10px
     .balance
       flex-basis(30%)
       p
