@@ -1,2 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+export const USER_OBJECT = 'USER_OBJECT';
+
 export const GOAL_OBJECT = 'GOAL_OBJECT';
+export const GOAL_COLLECTION = 'GOAL_COLLECTION';
+
+export const SUBGOAL_OBJECT = 'SUBGOAL_OBJECT';
+export const SUBGOAL_COLLECTION = 'SUBGOAL_COLLECTION';
+
+export const NOTIFICATIONS_OBJECT = 'NOTIFICATIONS_OBJECT';
+export const NOTIFICATIONS_COLLECTION = 'NOTIFICATIONS_COLLECTION';

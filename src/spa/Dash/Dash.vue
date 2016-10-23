@@ -32,12 +32,15 @@ import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
 import RegisterModal from './RegisterModal';
 
+import { goalsResource } from '../../vuex/resources';
+
 export default {
   data() {
     return {
       balance: 12099.50,
       open: false,
       title: 'Add goal',
+      goalResource: goalsResource(this.$resource),
     };
   },
   computed: {},
@@ -55,7 +58,8 @@ export default {
       this.open = true;
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 
