@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading v-show="loading"></loading>
+    <loading v-bind:loading="getLoader"></loading>
     <transition>
       <keep-alive>
         <router-view class="view"></router-view>
@@ -13,8 +13,15 @@
 import Hello from './shared-components/Hello';
 import Loading from './shared-components/Loading';
 
+import { getLoader } from './vuex/getters';
+
 export default {
   name: 'app',
+  vuex: {
+    getters: {
+      getLoader,
+    },
+  },
   components: {
     Hello,
     Loading,
