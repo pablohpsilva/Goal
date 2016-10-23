@@ -4,14 +4,10 @@
 
   +prefix-classes('RegisterModal__')
     .wrapper
-      background rgba(61,158,227,1)
-      background -moz-linear-gradient(left, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
-      background -webkit-gradient(left top, right top, color-stop(0%, rgba(61,158,227,1)), color-stop(100%, rgba(61,84,232,0.7)))
-      background -webkit-linear-gradient(left, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
-      background -o-linear-gradient(left, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
-      background -ms-linear-gradient(left, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
-      background linear-gradient(to right, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
-      color #fff
+      background rgba(61, 158, 227, 1)
+      background -webkit-linear-gradient(left, rgba(61, 158, 227, 1) 0%, rgba(61, 84, 232, .7) 100%)
+      background linear-gradient(to right, rgba(61, 158, 227, 1) 0%, rgba(61, 84, 232, .7) 100%)
+      color #FFF
       font 400 10px/1em $rubik
       left 0
       min-height 100%
@@ -50,10 +46,13 @@
       border 0 solid transparent
       border-bottom 1px solid #fff
       color #fff
-      font 400 1.6em/1em $rubik
+      font 400 1.6em/1.5 $rubik
       height 30px
       margin-bottom 30px
       padding 0
+
+      textarea&
+        height 100px
 
       &::placeholder
         color #fff
