@@ -4,4 +4,8 @@ import * as mutations from './mutation-types';
 /**
  * Category Actions
  */
-export const setGoal = ({ dispatch }, data) => dispatch(mutations.GOAL_OBJECT, data);
+export const setUser = ({ commit }, data) => commit(mutations.USER_OBJECT, data);
+
+export const setGoal = ({ commit }, data) => commit(mutations.GOAL_OBJECT, data);
+
+export const setLoader = ({ commit }, data) => commit(mutations.LOAGING_STATE, data);

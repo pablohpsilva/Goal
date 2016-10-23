@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <navigation v-bind:balance="balance"></navigation>
+    <navigation v-bind:balance="getUser ? getUser.balance : 0.0"></navigation>
     <transition name="zoom"
         enter-active-class="zoomIn"
         leave-active-class="zoomOut">
@@ -23,30 +23,53 @@
         Assign revenue
       </button>
     </div>
-    <item></item>
+    <div v-if="goalList && goalList.length">
+      <item v-for="goal in goalList" v-bind:item="goal"></item>
+    </div>
+    <div v-else>
+      Nope.
+    </div>
   </div>
 </template>
 
 <script type="text/babel">
+import { mapGetters, mapActions } from 'vuex';
+
 import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
 import RegisterModal from './RegisterModal';
 
+import {
+  goalsResource,
+  loginResource,
+ } from '../../vuex/resources';
+
 export default {
   data() {
     return {
-      balance: 12099.50,
       open: false,
       title: 'Add goal',
+      goalResource: goalsResource(this.$resource),
+      signinResource: loginResource(this.$resource),
+      goalList: [],
+      user: null,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      getUser: 'getUserObject',
+    }),
+  },
   components: {
     Item,
     RegisterModal,
     Navigation,
   },
   methods: {
+    ...mapActions([
+      'setUser',
+      'setLoader',
+    ]),
     closeModal() {
       this.open = false;
     },
@@ -54,8 +77,40 @@ export default {
       this.title = title;
       this.open = true;
     },
+    login() {
+      const user = {
+        user: 'vanhackathon',
+        password: 'code',
+      };
+      this.signinResource.login(user)
+        .then((doc) => {
+          this.user = doc.data;
+          this.setUser(doc.data);
+        })
+        .catch((error) => {
+          /* eslint-disable no-console */
+          console.warn('opaaaaaaa', error);
+          /* eslint-enable no-console */
+        });
+    },
+    requestGoalList() {
+      const id = 9;
+      this.setLoader(true);
+      this.goalResource.getGoals({ id })
+        .then((doc) => {
+          this.goalList = doc.data.goals;
+          this.setLoader(false);
+        })
+        .catch(() => {
+          this.goalList = [];
+          this.setLoader(false);
+        });
+    },
   },
-  mounted() {},
+  mounted() {
+    this.login();
+    this.requestGoalList();
+  },
 };
 </script>
 

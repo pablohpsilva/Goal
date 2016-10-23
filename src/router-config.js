@@ -21,20 +21,23 @@ export const routes = [
         component: Dash,
       },
       {
-        path: 'goal',
-        name: 'goal',
+        path: 'new-goal',
+        name: 'new-goal',
         component: NewGoal,
       },
       {
         path: 'goal/:id',
+        name: 'goal',
         component: Goal,
       },
       {
         path: 'goal/:id/notifications',
+        name: 'goal-notifications',
         component: Notifications,
       },
       {
         path: 'goal/:id/edit',
+        name: 'goal-edit',
         component: EditGoal,
       },
       {

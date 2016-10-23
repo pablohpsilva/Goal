@@ -3,7 +3,7 @@
   @import "../../assets/styles/mixins"
 
   .EditGoal
-    padding 40px 30px
+    padding 0 30px 30px
 
   +prefix-classes('EditGoal__')
     .Label
@@ -52,6 +52,15 @@
       &:last-of-type
         margin-bottom 50px
 
+      &--add
+        @extend .EditGoal__SubGoal
+        background-color $primary-color
+        border-color $primary-color
+        color #FFF
+
+        &::after
+          display none
+
     .Btn--submit
       background none
       border 1px $sec-color solid
@@ -71,6 +80,18 @@
 
 <template lang="html">
   <div>
+    <div class="Goal__Header">
+      <router-link class="Goal__Btn--back"
+                   :to="{ name: 'dash' }">
+                   <i class="icon-left Goal__Icon--back"></i>
+      </router-link>
+
+      <h1 class="Goal__Title">
+        <i class="icon-worldtrip"></i>
+        New York Trip
+      </h1>
+    </div>
+
     <action-bar></action-bar>
 
     <form class="EditGoal">
@@ -90,6 +111,19 @@
         <button class="EditGoal__SubGoal">Passport</button>
         <button class="EditGoal__SubGoal">Tickets</button>
         <button class="EditGoal__SubGoal">Hotel</button>
+        <button class="EditGoal__SubGoal--add"
+                v-on:click.stop="openModal('Add subgoal')"
+                type="button">
+                Add subgoal</button>
+
+        <transition name="zoom"
+            enter-active-class="zoomIn"
+            leave-active-class="zoomOut">
+          <sub-goal-modal v-show="open"
+              v-bind:open="open"
+              v-bind:title="title"
+              v-on:closemodal="closeModal"></sub-goal-modal>
+        </transition>
       </div>
 
       <button class="EditGoal__Btn--submit" type="submit">Save</button>
@@ -99,19 +133,32 @@
 
 <script>
 import ActionBar from '../../shared-components/ActionBar';
+import SubGoalModal from './SubGoalModal';
 
 export default {
   props: {},
   vuex: {},
   data() {
-    return {};
+    return {
+      open: false,
+      title: 'Add subgoal',
+    };
   },
   computed: {},
   watch: {},
   components: {
     ActionBar,
+    SubGoalModal,
   },
-  methods: {},
+  methods: {
+    closeModal() {
+      this.open = false;
+    },
+    openModal(title) {
+      this.title = title;
+      this.open = true;
+    },
+  },
   mounted() {},
 };
 </script>

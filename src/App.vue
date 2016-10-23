@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loading v-bind:loading="getLoader"></loading>
     <transition>
       <keep-alive>
         <router-view class="view"></router-view>
@@ -9,12 +10,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import Hello from './shared-components/Hello';
+import Loading from './shared-components/Loading';
 
 export default {
   name: 'app',
+  computed: {
+    ...mapGetters({
+      getLoader: 'getLoader',
+    }),
+  },
   components: {
     Hello,
+    Loading,
   },
 };
 </script>
