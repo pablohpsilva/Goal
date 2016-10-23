@@ -33,11 +33,11 @@
 </template>
 
 <script type="text/babel">
+import { mapActions } from 'vuex';
+
 import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
 import RegisterModal from './RegisterModal';
-
-import { setUser } from '../../vuex/actions';
 
 import {
   goalsResource,
@@ -45,14 +45,8 @@ import {
  } from '../../vuex/resources';
 
 export default {
-  vuex: {
-    actions: {
-      setUser,
-    },
-  },
   data() {
     return {
-      balance: 12099.50,
       open: false,
       title: 'Add goal',
       goalResource: goalsResource(this.$resource),
@@ -68,6 +62,9 @@ export default {
     Navigation,
   },
   methods: {
+    ...mapActions([
+      'setUser',
+    ]),
     closeModal() {
       this.open = false;
     },

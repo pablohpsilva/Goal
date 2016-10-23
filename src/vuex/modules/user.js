@@ -5,7 +5,7 @@ import {
 const mutations = {
   [USER_OBJECT](state, data) {
     if (data && typeof data === 'object') {
-      state.goal = data;
+      state.user = data;
     }
   },
 };

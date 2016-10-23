@@ -22,7 +22,6 @@ Vue.use(VueResource);
 Vue.directive('date', vDate);
 Vue.directive('money', vMoney);
 
-/* eslint-disable no-new */
 const store = new Vuex.Store(VuexStore);
 
 const router = new Router({
