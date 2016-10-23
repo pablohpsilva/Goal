@@ -1,5 +1,6 @@
 <template lang="html">
-  <div class="Item__wrapper"
+  <router-link class="Item__wrapper"
+      v-bind:to="{ name: 'goal', params: { id: item.goalId }}"
       v-if="item">
     <div class="Item__icon">
       <i v-bind:class="item.icon"></i>
@@ -18,7 +19,7 @@
     <div class="Item__percentage">
       {{ percentage }}%
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>

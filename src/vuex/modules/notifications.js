@@ -1,6 +1,7 @@
 import {
   NOTIFICATIONS_OBJECT,
   NOTIFICATIONS_COLLECTION,
+  SET_NOTIFICATIONS_BAR_STATUS,
 } from '../mutation-types';
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
       state.goal = data;
     }
   },
+  [SET_NOTIFICATIONS_BAR_STATUS](state, status) {
+    state.notificationsBarStatus = status;
+  },
 };
 
 const state = {
@@ -22,6 +26,7 @@ const state = {
     message: '',
   },
   notifications: [],
+  notificationsBarStatus: false,
 };
 
 export default {
