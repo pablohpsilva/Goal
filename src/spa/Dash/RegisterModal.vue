@@ -1,66 +1,3 @@
-<template lang="html">
-  <div class="RegisterModal__wrapper">
-    <div class="RegisterModal__header">
-      <div class="RegisterModal__title">
-        {{ title }}
-      </div>
-      <div class="RegisterModal__close"
-          v-on:click="closemodal">
-        <i class="icon-cancel"></i>
-      </div>
-    </div>
-    <div class="RegisterModal__content">
-      <input class="RegisterModal__textinput"
-          type="text"
-          name="name"
-          placeholder="Name"
-          maxlength="50">
-      <input class="RegisterModal__textinput"
-          type="text"
-          name="date"
-          v-date
-          placeholder="Date">
-      <input class="RegisterModal__textinput"
-          type="text"
-          name="description"
-          placeholder="Description"
-          maxlength="250">
-    </div>
-    <div class="RegisterModal__footer">
-      <input class="Btn__clean--white"
-          type="button"
-          name="name"
-          value="Save">
-    </div>
-  </div>
-</template>
-
-<script type="text/babel">
-export default {
-  props: {
-    open: {
-      type: Boolean,
-      default() { return 'false'; },
-    },
-    title: {
-      type: String,
-      default() { return 'Add goal'; },
-    },
-  },
-  data() {
-    return {};
-  },
-  computed: {},
-  components: {},
-  methods: {
-    closemodal() {
-      this.$emit('closemodal');
-    },
-  },
-  mounted() {},
-};
-</script>
-
 <style lang="stylus">
   @import "../../assets/styles/variables"
   @import "../../assets/styles/mixins"
@@ -76,42 +13,230 @@ export default {
       background linear-gradient(to right, rgba(61,158,227,1) 0%, rgba(61,84,232,0.7) 100%)
       color #fff
       font 400 10px/1em $rubik
-      height 100vh
       left 0
-      padding 25px 15px 0 15px
-      position fixed
       min-height 100%
       min-width 100%
+      padding 25px 15px
+      position absolute
       top 0
       width 100%
-      .header
-        flex()
-        padding-top 5vh
-        .title
-          flex-basis(90%)
-          font-size 1.8em
-        .close
-          flex-basis(10%)
-          font-size 1.5em
-          text-align right
-      .content
-        flex()
-        flex-direction(column)
-        margin-top 5vh
-      .textinput
-        background transparent
-        border 0 solid transparent
-        border-bottom 1px solid #fff
+
+    .header
+      flex()
+      margin-bottom 60px
+      padding-top 25px
+
+      .title
+        flex-basis(90%)
+        font-size 1.6em
+        font-weight 600
+
+      .close
+        flex-basis(10%)
+        font-size 1.5em
+        text-align right
+
+    .content
+      flex()
+      flex-direction(column)
+
+    .Label
+      color #FFF
+      font-size 1.6em
+      font-weight 600
+
+    .textinput
+      background transparent
+      border 0 solid transparent
+      border-bottom 1px solid #fff
+      color #fff
+      font 400 1.6em/1em $rubik
+      height 30px
+      margin-bottom 30px
+      padding 0
+
+      &::placeholder
         color #fff
-        font 400 1.5em/1em $rubik
-        padding 20px 0
-        margin 10px 0
-        &::placeholder
-          color #fff
-      .footer
-        flex()
+
+      &:last-child
+        margin-bottom 50px
+
+    .footer
+      flex()
+
+  .Btn--subGoal
+    background #FFF
+    border none
+    border-radius 3px
+    color $primary-color
+    font 400 14px $rubik
+    margin-bottom 10px
+    padding 10px
+    position relative
+    width 100%
+
+    &:last-of-type
+      margin-bottom 30px
+
+    &::after
+      background-color $danger-color
+      border-radius 50%
+      color #FFF
+      content "x"
+      display block
+      height 14px
+      line-height 1
+      position absolute
+      right -7px
+      top -7px
+      width 14px
+
   .Btn__clean--white
-    margin-top 5vh
-    padding 15px 20px
+    background-color #29ABE1
+    border-width 1px
+    font-size 16px
+    font-weight 600
+    padding 22px 20px
     width 100%
 </style>
+
+<template lang="html">
+  <div class="RegisterModal__wrapper">
+    <div class="RegisterModal__header">
+      <div class="RegisterModal__title">
+        {{ title }}
+      </div>
+      <div class="RegisterModal__close"
+           v-on:click="closemodal">
+        <i class="icon-cancel"></i>
+      </div>
+    </div>
+    <div class="RegisterModal__content">
+      <label class="RegisterModal__Label"
+             for="name">Name</label>
+      <input id="name"
+             name="name"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="50" />
+
+      <label class="RegisterModal__Label" for="start_date">Start Date</label>
+      <input id="start_date"
+             name="date"
+             class="RegisterModal__textinput"
+             v-date
+             type="text" />
+
+      <label class="RegisterModal__Label"
+             for="do_date">Do Date</label>
+      <input id="do_date"
+             name="description"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="250" />
+
+      <label class="RegisterModal__Label"
+             for="description">Description</label>
+      <textarea id="description"
+             name="description"
+             class="RegisterModal__textinput"
+             maxlength="250"></textarea>
+    </div>
+
+    <div class="RegisterModal__content"
+         v-show="addSubGoal">
+      <label class="RegisterModal__Label"
+             for="name_subgoal">Subgoal's name</label>
+      <input id="name_subgoal"
+             v-model="newSubGoal.nameSubgoal"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="50" />
+
+      <label class="RegisterModal__Label"
+             for="value_subgoal">Subgoal's value</label>
+      <input id="value_subgoal"
+             v-model="newSubGoal.valueSubgoal"
+             class="RegisterModal__textinput"
+             type="text"
+             maxlength="50" />
+
+      <label class="RegisterModal__Label"
+             for="description_subgoal">Subgoal's description</label>
+      <textarea id="description_subgoal"
+                v-model="newSubGoal.descriptionSubgoal"
+                class="RegisterModal__textinput"
+                maxlength="250"></textarea>
+    </div>
+
+    <button class="Btn__clean--small"
+            v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
+            type="button">{{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}</button>
+
+    <button class="Btn--subGoal"
+            v-for="(subGoal, index) in subGoalsList"
+            v-on:click="subGoalsList.splice(index, 1)"
+            type="button">
+      {{ subGoal.name }}
+    </button>
+
+    <div class="RegisterModal__footer">
+      <button class="Btn__clean--white"
+              type="button">Add goal</button>
+    </div>
+  </div>
+</template>
+
+<script type="text/babel">
+export default {
+  props: {
+    open: {
+      type: Boolean,
+      default() {
+        return 'false';
+      },
+    },
+    title: {
+      type: String,
+      default() {
+        return 'Add goal';
+      },
+    },
+  },
+  data() {
+    return {
+      newSubGoal: {
+        nameSubgoal: '',
+        valueSubgoal: '',
+        descriptionSubgoal: '',
+      },
+      addSubGoal: false,
+      subGoalsList: [],
+    };
+  },
+  computed: {},
+  components: {},
+  methods: {
+    openSubGoalForm(status) {
+      return status;
+    },
+    addSubGoalsListItem() {
+      this.subGoalsList.push({
+        name: this.newSubGoal.nameSubgoal,
+        value: this.newSubGoal.valueSubgoal,
+        description: this.newSubGoal.descriptionSubgoal,
+      });
+
+      this.newSubGoal = {
+        nameSubgoal: '',
+        valueSubgoal: '',
+        descriptionSubgoal: '',
+      };
+    },
+    closemodal() {
+      this.$emit('closemodal');
+    },
+  },
+  mounted() {},
+};
+</script>
