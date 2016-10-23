@@ -22,7 +22,7 @@ const subGoalsActions = {
 export const subGoalsResource = resource => resource(`${basePath}/goals/{goalid}/subgoals`, {}, subGoalsActions);
 
 const notificationsActions = {
-  getSubGoal: { method: 'GET', url: `${basePath}/notification/user/{userId}/goal/{goalId}` },
-  getSubGoals: { method: 'GET', url: `${basePath}/notification/user/{userId}` },
+  getGoalNotifications: { method: 'GET', url: `${basePath}/notification/user/{userId}/goal/{goalId}` },
+  getGeneralNotifications: { method: 'GET', url: `${basePath}/notification/user/{userId}` },
 };
 export const notificationsResource = resource => resource(`${basePath}/notification/user/{userId}`, {}, notificationsActions);
