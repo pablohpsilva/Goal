@@ -1,32 +1,35 @@
 <template lang="html">
   <body class="Landing__body">
-    <section class="bgtopo">
-      <div class="grid1">
+    <section class="Top__background">
+      <div class="Grid__area1">
         <img class="grow" src="../../assets/icons/logotipo.svg"/>
-        <h1>Application<br/> amazing web <br />to make all your<br /> dreams</h1>
+        <h1 class="Heading__default Heading__default--h1">
+          <span style="display: block;">Goals</span>
+          <i style="font-size:20px; line-height: 5px; padding-left: 20px;">by Grow and Magic Trick</s>
+        </h1>
       </div>
-      <div class="grid2">
+      <div class="Grid__area2">
         <img src="../../assets/iphone.png"/>
       </div>
     </section>
 
     <div class="section2">
-      <h2>Tecnologia and economy <br/>side and side for you </h2>
+      <h2 class="Heading__default Heading__default--h2">Tecnologia and economy <br/>side and side for you </h2>
       <div style="display: block; margin-top: 50px">
-        <a class="btnh2" href="/dash">Go to aplication</a>
+        <a class="btnh2" href="/dash">Go to <b>aplication</b></a>
       </div>
 
         <div class="icon1">
           <img style="margin-left: 30%;" src="../../assets/icons/img1.png"/>
-          <h3>Tecnologia and <br />economy</h3>
+          <h3 class="Heading__default Heading__default--h3">Tecnologia and <br />economy</h3>
         </div>
         <div class="icon1">
           <img style="margin-left: 30%; margin-top: -20px;" src="../../assets/icons/img2.png"/>
-          <h3>Tecnologia and <br />economy</h3>
+          <h3 class="Heading__default Heading__default--h3">Tecnologia and <br />economy</h3>
         </div>
         <div class="icon1">
           <img style="margin-left: 30%;" src="../../assets/icons/img1.png"/>
-          <h3>Tecnologia and <br />economy</h3>
+          <h3 class="Heading__default Heading__default--h3">Tecnologia and <br />economy</h3>
         </div>
     </div>
 
@@ -35,9 +38,9 @@
 
     </div>
    <div class="section2">
-      <h2>Tecnologia and economy <br/>side and side for you </h2>
+      <h2 class="Heading__default Heading__default--h2">Tecnologia and economy <br/>side and side for you </h2>
       <div style="display: block; margin-top: 50px">
-        <a class="btnh2" href="/dash">Go to aplication</a>
+        <a class="btnh2" href="/dash">Go to <b>aplication</b></a>
       </div>
    </div>
 
@@ -71,7 +74,7 @@ export default {
   background-position: 0 -95px;
   margin: 0 auto;
 }
-.bgtopo {
+.Top__background {
   width: 960px;
   height: 800px;
   /* position: absolute; */
@@ -81,21 +84,25 @@ export default {
   margin-top: 50px;
 }
 
-.grid1 {
+.Grid__area1 {
   width: 480px;
   height: 100%;
   float: left;
 }
-.grid2 {
+.Grid__area2 {
   width: 480px;
   height: 100%;
   float: left;
   margin-top: 190px;
 }
 
-h1 {font-family: 'Rubik', sans-serif; color: #fff; font-size: 55px; margin-top: 140px;}
-h2 {font-family: 'Rubik', sans-serif; color: #29abe1; font-size: 55px; text-align: center; margin-top: 100px;}
-h3 {font-family: 'Rubik', sans-serif; color: #29abe1; font-size: 25px; text-align: center; margin-top: 50px;}
+.Heading__default {
+  font-family: 'Rubik', sans-serif; color: #29abe1; font-size: 70px;
+}
+
+h1.Heading__default--h1 {font-family: 'Rubik', sans-serif; color: #fff; font-size: 55px; margin-top: 140px;}
+h2.Heading__default--h2 {text-align: center; margin-top: 100px;}
+h3.Heading__default--h3 {text-align: center; margin-top: 50px; font-size: 45px;}
 .grow {
   width: 200px;
 }
