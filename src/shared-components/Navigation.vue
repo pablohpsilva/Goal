@@ -58,9 +58,12 @@ export default {
       font 400 1em/1em Rubik, sans-serif
     .logo
       flex-basis(70%)
+      position relative
       img
-        height 3em
+        height 8em
         float left
+        position absolute
+        top -2em
     .balance
       flex-basis(30%)
       p

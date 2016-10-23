@@ -96,21 +96,22 @@
 
     <form class="EditGoal">
       <label class="EditGoal__Label" for="name">Name</label>
-      <input id="name" class="EditGoal__Input" type="text" />
+      <input id="name" class="EditGoal__Input" v-model="goal.name" type="text" />
 
       <label class="EditGoal__Label" for="start_date">Start date</label>
-      <input id="start_date" class="EditGoal__Input" type="text" />
+      <input id="start_date" class="EditGoal__Input" v-model="goal.startDate" type="text" />
 
-      <label class="EditGoal__Label" for="do_date">Do date</label>
-      <input id="do_date" class="EditGoal__Input" type="text" />
+      <label class="EditGoal__Label" for="due_date">Due date</label>
+      <input id="due_date" class="EditGoal__Input" v-model="goal.dueDate" type="text" />
 
       <label class="EditGoal__Label" for="description">Description</label>
-      <textarea id="description" class="EditGoal__Input"></textarea>
+      <textarea id="description" class="EditGoal__Input">{{ goal.description }}</textarea>
 
       <div class="EditGoal__SubGoals">
-        <button class="EditGoal__SubGoal">Passport</button>
-        <button class="EditGoal__SubGoal">Tickets</button>
-        <button class="EditGoal__SubGoal">Hotel</button>
+        <button class="EditGoal__SubGoal"
+          v-for="subgoal in subgoals">
+          {{ subgoal.name }}
+        </button>
         <button class="EditGoal__SubGoal--add"
                 v-on:click.stop="openModal('Add subgoal')"
                 type="button">
@@ -135,13 +136,20 @@
 import ActionBar from '../../shared-components/ActionBar';
 import SubGoalModal from './SubGoalModal';
 
+import {
+  subGoalsResource,
+ } from '../../vuex/resources';
+
 export default {
   props: {},
   vuex: {},
   data() {
     return {
+      subGoalsResource: subGoalsResource(this.$resource),
       open: false,
       title: 'Add subgoal',
+      goal: {},
+      subgoals: [],
     };
   },
   computed: {},
@@ -158,7 +166,25 @@ export default {
       this.title = title;
       this.open = true;
     },
+    requestGoalInfo() {
+      const id = 24;
+      this.subGoalsResource.getSubGoals({ id })
+        .then((success) => {
+          this.goal = {
+            name: success.data.goalName,
+            description: success.data.goalDescription,
+            startDate: success.data.startDate,
+            dueDate: success.data.dueDate,
+          };
+          this.subgoals = success.data.subGoals;
+        })
+        .catch(() => {
+          this.setLoader(false);
+        });
+    },
   },
-  mounted() {},
+  mounted() {
+    this.requestGoalInfo();
+  },
 };
 </script>

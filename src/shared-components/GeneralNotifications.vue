@@ -13,6 +13,8 @@
     transition transform .3s ease
     top 0
     width calc(100% - 40px)
+    max-width 400px
+    z-index 1
 
     &--active
       @extend .GeneralNotifications
@@ -21,10 +23,12 @@
 
       .GeneralNotification__RedIcon
         &::before
-          display none
+          transition opacity .6s ease
+          opacity 0
 
         &::after
-          display block
+          transition opacity .6s ease
+          opacity 1
 
   .GeneralNotifications__List
     list-style none
@@ -86,18 +90,33 @@
         position absolute
         top calc(50% - 10px)
         width 20px
+        transition opacity .6s ease
 
       &::before
         background $danger-color
         border-radius 50%
         content ""
         display block
+        opacity 1
 
       &::after
         color $danger-color
         content "x"
-        display none
+        opacity 0
         line-height .5
+
+  @media (min-width: 900px)
+    .GeneralNotification__RedIcon
+      &::before
+      &::after
+        height 30px
+        left calc(50% - 10px)
+        position absolute
+        top calc(50% - 10px)
+        width 30px
+        transition opacity .6s ease
+      &::before
+        left calc(50% - 15px)
 </style>
 
 <template lang="html">

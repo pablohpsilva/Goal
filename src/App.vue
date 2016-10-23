@@ -2,7 +2,9 @@
   <div id="app">
     <loading v-bind:loading="getLoader"></loading>
     <general-notifications></general-notifications>
-    <transition>
+    <transition name="fade"
+        enter-active-class="fadeLeftIn"
+        leave-active-class="fadeLeftOut">
       <keep-alive>
         <router-view class="view"></router-view>
       </keep-alive>
@@ -44,6 +46,8 @@ export default {
   -ms-transition all .3s ease
   -moz-transition all .3s ease
   -wekbit-transition all .3s ease
+  margin: 0 auto;
+  max-width: 800px;
 
 .test-enter, .test-leave
   opacity 0
@@ -53,13 +57,15 @@ export default {
   -moz-transform translate3d(10px, 0, 0)
   -webkit-transform translate3d(10px, 0, 0)
 
+html
+  height 100%
+
 body
   margin 0
   font-size 10px
   background url('assets/background.svg') no-repeat center center
   background-size cover
   min-height 100%
-  height 100vh
   *
     box-sizing border-box
     &:focus

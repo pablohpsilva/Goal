@@ -46,10 +46,7 @@
       padding 0 25px
 
     .SubGoal
-      display flex
-      justify-content space-between
-      align-items center
-      padding-left 75px
+      padding-left 55px
       position relative
 
       &::before
@@ -71,7 +68,7 @@
         left 26px
         position absolute
         top calc(50%)
-        width 38px
+        width 23px
 
       &:not(:last-child)
         margin-bottom 30px
@@ -84,7 +81,10 @@
 
       &-Description
         color $trd-color
-        font 600 21px $rubik
+        display block
+        font 400 20px $rubik
+        margin-bottom 5px
+        width 100%
 
         &--complete
           @extend .Goal__SubGoal-Description
@@ -93,11 +93,14 @@
       &-Value
         color $trd-color
         display block
-        font 400 17px $rubik
+        flex()
+        flex-justify(space-between)
+        font 300 17px $rubik
+        width 100%
 
       &-Percentage
         color $trd-color
-        font 400 17px $rubik
+        font 300 17px $rubik
         padding-right 28px
         position relative
 
@@ -113,7 +116,7 @@
             height 25px
             position absolute
             right 0
-            top -9px
+            top -4px
             width 25px
 
     .Bar
@@ -130,8 +133,9 @@
         background-color $sec-color
         background-image -webkit-linear-gradient(bottom, $sec-color 67%, $sec-color 89%, $primary-color 100%)
         background-image linear-gradient(to top, $sec-color 67%, $sec-color 89%, $primary-color 100%)
-        height 50vh
+        height 0
         width 100%
+        transition height 1.5s ease-in-out
 
         &--complete
           @extend .Goal__Bar-intern
@@ -147,46 +151,40 @@
       </router-link>
 
       <h1 class="Goal__Title">
-        <i class="icon-worldtrip"></i>
-        New York Trip
+        {{ goalName }}
       </h1>
     </div>
 
     <action-bar></action-bar>
 
     <div class="Goal__Status">
-      <h3 class="Goal__Status-Title">Faltam $ 1.999,00 para atingir sua meta</h3>
+      <h3 class="Goal__Status-Title">You're $ {{ remainingValue().toFixed(0) }} to reach your goal. Keep it up.</h3>
       <div class="Goal__Status-Graphic">
         <chart v-bind:chart-data="chartData" v-bind:options="chartOptions"></chart>
       </div>
     </div>
 
-    <ul class="Goal__SubGoals" v-for="subgoal in subgoalList">
-      <li class="Goal__SubGoal--complete">
-        <span class="Goal__SubGoal-Description--complete">
-          {{ subgoal.name }}
-          <span class="Goal__SubGoal-Value">$ {{ subgoal.value }}</span>
+    <ul class="Goal__SubGoals">
+      <li v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+          'Goal__SubGoal--complete' : 'Goal__SubGoal'"
+          v-for="subgoal in subgoalList">
+        <span v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+              'Goal__SubGoal-Description--complete' : 'Goal__SubGoal-Description'">
+              {{ subgoal.name }}
         </span>
-        <span class="Goal__SubGoal-Percentage--complete">100%</span>
+        <span class="Goal__SubGoal-Value">
+          {{ '$ ' + subgoal.value.toFixed(2) }}
+          <span v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+                'Goal__SubGoal-Percentage--complete' : 'Goal__SubGoal-Percentage'">
+                {{ calcPercentage(subgoal.value, subgoal.reservedBalance) }}%</span>
+        </span>
       </li>
-      <!-- <li class="Goal__SubGoal">
-        <span class="Goal__SubGoal-Description">
-          Tickets
-          <span class="Goal__SubGoal-Value">$ 3,000.00</span>
-        </span>
-        <span class="Goal__SubGoal-Percentage">75%</span>
-      </li>
-      <li class="Goal__SubGoal">
-        <span class="Goal__SubGoal-Description">
-          Hotel
-          <span class="Goal__SubGoal-Value">$ 1,000.00</span>
-        </span>
-        <span class="Goal__SubGoal-Percentage">45%</span>
-      </li> -->
     </ul>
 
     <div class="Goal__Bar">
-      <div class="Goal__Bar-intern" style="height: 75vh"></div>
+      <div v-bind:class="(totalPercentage() === 100) ?
+           'Goal__Bar-intern--complete' : 'Goal__Bar-intern'"
+           v-bind:style="{ height: totalPercentage() + 'vh' }"></div>
     </div>
   </div>
 </template>
@@ -206,6 +204,7 @@ export default {
   vuex: {},
   data() {
     return {
+      goalName: '',
       subGoalsResource: subGoalsResource(this.$resource),
       subgoalList: [],
       chartData: {
@@ -265,6 +264,7 @@ export default {
       this.setLoader(true);
       this.subGoalsResource.getSubGoals({ id })
         .then((doc) => {
+          this.goalName = doc.data.goalName;
           this.subgoalList = doc.data.subGoals;
           this.setLoader(false);
         })
@@ -272,6 +272,19 @@ export default {
           this.subgoalList = [];
           this.setLoader(false);
         });
+    },
+    calcPercentage(amount, payment) {
+      return +(((payment * 100) / amount).toFixed(0));
+    },
+    remainingValue() {
+      const total = this.subgoalList.reduce((att, el) =>
+        att + +(+el.value - +el.reservedBalance), 0);
+      return total;
+    },
+    totalPercentage() {
+      const total = this.subgoalList.reduce((att, el) =>
+        att + this.calcPercentage(el.value, el.reservedBalance), 0);
+      return total / this.subgoalList.length;
     },
   },
   mounted() {

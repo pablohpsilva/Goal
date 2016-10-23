@@ -1,7 +1,60 @@
+<style lang="stylus">
+  @import "../../assets/styles/variables"
+  @import "../../assets/styles/mixins"
+
+  +prefix-classes('Item__')
+    .wrapper
+      background transparent
+      border-bottom: 1px solid rgba($trd-color, .2)
+      color $trd-color
+      flex()
+      font 400 1.5em/1em $rubik
+      padding 4vh 15px
+      text-decoration none
+
+      &:hover
+        background rgba($trd-color, .2);
+
+    .icon
+      flex-basis(15%)
+      font-size 2em
+      text-align center
+
+    .info
+      flex-basis(70%)
+      padding 0 15px
+
+    .progressbar
+      border-radius 10px
+      height 4px
+      margin-top 0.5em
+      width 0
+      transition all 1.5s ease-in-out
+
+      &.gray
+        background $trd-color
+
+      &.red
+        background $red-color
+
+      &.yellow
+        background $yellow-color
+
+      &.green
+        background $green-color
+
+      span
+        display block
+
+    .percentage
+      flex-basis(15%)
+      font-weight 200
+      text-align center
+</style>
+
 <template lang="html">
   <router-link class="Item__wrapper"
-      v-bind:to="{ name: 'goal', params: { id: item.goalId }}"
-      v-if="item">
+      v-bind:to="{ name: 'goal', params: { id: item.goalId }}">
     <div class="Item__icon">
       <i v-bind:class="item.icon"></i>
     </div>
@@ -59,44 +112,3 @@ export default {
   mounted() {},
 };
 </script>
-
-<style lang="stylus">
-  @import "../../assets/styles/variables"
-  @import "../../assets/styles/mixins"
-
-  +prefix-classes('Item__')
-    .wrapper
-      flex()
-      background transparent
-      border-bottom: 1px solid rgba($trd-color, .2)
-      color $trd-color
-      font 400 1.5em/1em $rubik
-      padding 4vh 15px
-      &:hover
-        background rgba($trd-color, .2);
-    .icon
-      flex-basis(15%)
-      font-size 2em
-      text-align center
-    .info
-      flex-basis(70%)
-      padding 0 15px
-    .progressbar
-      border-radius 10px
-      height 4px
-      margin-top 0.5em
-      &.gray
-        background $trd-color
-      &.red
-        background $red-color
-      &.yellow
-        background $yellow-color
-      &.green
-        background $green-color
-      span
-        display block
-    .percentage
-      flex-basis(15%)
-      text-align center
-      font-weight 200
-</style>
