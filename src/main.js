@@ -19,6 +19,8 @@ Vue.use(Vuex);
 Vue.use(Router);
 Vue.use(VueResource);
 
+Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+
 Vue.directive('date', vDate);
 Vue.directive('money', vMoney);
 
