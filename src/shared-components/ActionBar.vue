@@ -1,11 +1,71 @@
+<style lang="stylus">
+  @import "../assets/styles/variables"
+  @import "../assets/styles/mixins"
+
+  +prefix-classes('ActionBar__')
+    .actions
+      flex()
+      flex-justify(space-between)
+      font-size 4.5em
+      list-style none
+      margin 15px 0 30px
+      padding 0 25px
+
+    .action
+      color $trd-color
+      cursor pointer
+      display block
+      position relative
+      text-decoration none
+      transition color 0.3s ease
+
+      &:hover
+      &:active
+        color $primary-color
+        transition color 0.3s ease
+
+  .active
+    color $primary-color
+    cursor pointer
+
+  .circle_notification
+    background $danger-color
+    border-radius 50%
+    bottom 0
+    color #FFF
+    display inline-block
+    font-size 13px
+    height 14px
+    line-height .9
+    padding 0
+    position absolute
+    right 0
+    text-align center
+    width 14px
+</style>
+
 <template lang="html">
-  <div class="">
-    <ul class="ActionBar__actions">
-      <li class="icon-general-goal ActionBar__action"></li>
-      <li class="icon-alert active ActionBar__action"><span class="circle_notification">3</span></li>
-      <li class="icon-tool ActionBar__action"></li>
-    </ul>
-  </div>
+  <ul class="ActionBar__actions">
+    <li>
+      <router-link
+        :to="{ name: 'goal', params: { id: 1 }}"
+        class="icon-general-goal ActionBar__action">
+      </router-link>
+    </li>
+    <li>
+      <router-link
+        :to="{ name: 'goal-notifications', params: { id: 1 }}"
+        class="icon-alert active ActionBar__action">
+        <span class="circle_notification">3</span>
+      </router-link>
+    </li>
+    <li>
+      <router-link
+        :to="{ name: 'goal-edit', params: { id: 1 }}"
+        class="icon-tool ActionBar__action">
+        </router-link>
+    </li>
+  </ul>
 </template>
 
 <script type="text/babel">
@@ -19,41 +79,3 @@ export default {
   mounted() {},
 };
 </script>
-
-<style lang="stylus">
-  @import "../assets/styles/variables"
-  @import "../assets/styles/mixins"
-
-  +prefix-classes('ActionBar__')
-    .actions
-      flex()
-      flex-justify(space-between)
-      padding 0 5vh
-      list-style none
-      font-size 4.5em
-      margin 15px 0px
-    .action
-      color #b9b9b9
-      cursor pointer
-      transition color 0.3s ease
-      &:hover
-        color #51b9e5
-        transition color 0.3s ease
-      &:visited
-        color #b9b9b9
-  .active
-    color #51b9e5
-    cursor pointer
-  .circle_notification
-    position absolute
-    background #ff3636
-    border-radius 100%
-    height 10px
-    width 10px
-    padding 2px 3px 7px 6px
-    margin-top 27px
-    display inline-block
-    color #fff
-    font-size 0.3em
-    margin-left -20px
-</style>

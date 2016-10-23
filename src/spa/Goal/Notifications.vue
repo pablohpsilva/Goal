@@ -7,7 +7,8 @@
     padding 0
 
   .GoalNotification
-    padding 10px 25px
+    padding 0 25px
+    padding-bottom 10px
     transition background .3s ease
 
     &:hover
@@ -31,6 +32,18 @@
 
 <template lang="html">
   <div>
+    <div class="Goal__Header">
+      <router-link class="Goal__Btn--back"
+                   :to="{ name: 'dash' }">
+                   <i class="icon-left Goal__Icon--back"></i>
+      </router-link>
+
+      <h1 class="Goal__Title">
+        <i class="icon-worldtrip"></i>
+        New York Trip
+      </h1>
+    </div>
+
     <action-bar></action-bar>
 
     <ul class="GoalNotifications">

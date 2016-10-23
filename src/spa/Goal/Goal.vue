@@ -7,7 +7,7 @@
       flex()
       flex-justify(space-between)
       flex-align-items(center)
-      margin-bottom 30px
+      margin 5px 0 15px
       padding 0 25px
 
     .Btn--back
@@ -140,7 +140,6 @@
 
 <template lang="html">
   <div class="Goal">
-    <action-bar></action-bar>
     <div class="Goal__Header">
       <router-link class="Goal__Btn--back"
                    :to="{ name: 'dash' }">
@@ -152,6 +151,8 @@
         New York Trip
       </h1>
     </div>
+
+    <action-bar></action-bar>
 
     <div class="Goal__Status">
       <h3 class="Goal__Status-Title">Faltam $ 1.999,00 para atingir sua meta</h3>
