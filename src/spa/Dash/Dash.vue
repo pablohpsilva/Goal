@@ -68,6 +68,7 @@ export default {
   methods: {
     ...mapActions([
       'setUser',
+      'setLoader',
     ]),
     closeModal() {
       this.open = false;
@@ -94,12 +95,15 @@ export default {
     },
     requestGoalList() {
       const id = 9;
+      this.setLoader(true);
       this.goalResource.getGoals({ id })
         .then((doc) => {
           this.goalList = doc.data.goals;
+          this.setLoader(false);
         })
         .catch(() => {
           this.goalList = [];
+          this.setLoader(false);
         });
     },
   },

@@ -4,7 +4,7 @@ import {
 
 const mutations = {
   [LOAGING_STATE](state, data) {
-    if (data && typeof data === 'boolean') {
+    if (typeof data === 'boolean') {
       state.loading = data;
     }
   },
