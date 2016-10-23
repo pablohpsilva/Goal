@@ -151,7 +151,6 @@
       </router-link>
 
       <h1 class="Goal__Title">
-        <i class="icon-worldtrip"></i>
         {{ goalName }}
       </h1>
     </div>
@@ -205,7 +204,7 @@ export default {
   vuex: {},
   data() {
     return {
-      teste: '',
+      goalName: '',
       subGoalsResource: subGoalsResource(this.$resource),
       subgoalList: [],
       chartData: {

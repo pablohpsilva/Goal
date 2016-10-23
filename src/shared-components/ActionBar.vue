@@ -49,20 +49,22 @@
     <li>
       <router-link
         :to="{ name: 'goal', params: { id: 1 }}"
-        class="icon-general-goal ActionBar__action">
+        class="icon-general-goal ActionBar__action"
+        v-bind:class="($route.name === 'goal') ? 'active' : ''">
       </router-link>
     </li>
     <li>
       <router-link
         :to="{ name: 'goal-notifications', params: { id: 1 }}"
-        class="icon-alert active ActionBar__action">
-        <span class="circle_notification">3</span>
+        class="icon-alert ActionBar__action"
+        v-bind:class="($route.name === 'goal-notifications') ? 'active' : ''">
       </router-link>
     </li>
     <li>
       <router-link
         :to="{ name: 'goal-edit', params: { id: 1 }}"
-        class="icon-tool ActionBar__action">
+        class="icon-tool ActionBar__action"
+        v-bind:class="($route.name === 'goal-edit') ? 'active' : ''">
         </router-link>
     </li>
   </ul>
