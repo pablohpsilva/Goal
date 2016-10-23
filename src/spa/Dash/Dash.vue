@@ -23,7 +23,12 @@
         Assign revenue
       </button>
     </div>
-    <item></item>
+    <div v-if="goalList && goalList.length">
+      <item v-for="goal in goalList" v-bind:item="goal"></item>
+    </div>
+    <div v-else>
+      Nope.
+    </div>
   </div>
 </template>
 
@@ -41,6 +46,7 @@ export default {
       open: false,
       title: 'Add goal',
       goalResource: goalsResource(this.$resource),
+      goalList: [],
     };
   },
   computed: {},
@@ -57,8 +63,19 @@ export default {
       this.title = title;
       this.open = true;
     },
+    requestGoalList() {
+      const id = 9;
+      this.goalResource.getGoals({ id })
+        .then((doc) => {
+          this.goalList = doc.data.goals;
+        })
+        .catch(() => {
+          this.goalList = [];
+        });
+    },
   },
   mounted() {
+    this.requestGoalList();
   },
 };
 </script>
