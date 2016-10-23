@@ -8,7 +8,9 @@
           v-bind:open="open"
           v-bind:title="title"
           v-on:closemodal="closeModal"
-          v-on:changeloadingstatus="changeLoadingStatus"></register-modal>
+          v-on:changeloadingstatus="changeLoadingStatus"
+          v-on:updategoalslist="updateGoalList"
+          ></register-modal>
     </transition>
     <div class="Dash__actions">
       <button class="Btn__clean--blue"
@@ -24,8 +26,8 @@
         Assign revenue
       </button>
     </div>
-    <div v-if="goalList && goalList.length">
-      <item v-for="goal in goalList" v-bind:item="goal"></item>
+    <div v-if="getGoals && getGoals.length">
+      <item v-for="goal in getGoals" v-bind:item="goal"></item>
     </div>
   </div>
 </template>
@@ -55,6 +57,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      getGoals: 'getGoalCollection',
       getUser: 'getUserObject',
     }),
   },
@@ -66,6 +69,7 @@ export default {
   methods: {
     ...mapActions([
       'setUser',
+      'setGoalCollection',
       'setLoader',
     ]),
     closeModal() {
@@ -78,6 +82,12 @@ export default {
       this.title = title;
       this.open = true;
     },
+    updateGoalList(goals) {
+      if (goals.length > this.getGoals.length) {
+        this.setGoalCollection(goals);
+      }
+      return;
+    },
     login() {
       const user = {
         user: 'vanhackathon',
@@ -87,11 +97,6 @@ export default {
         .then((doc) => {
           this.user = doc.data;
           this.setUser(doc.data);
-        })
-        .catch((error) => {
-          /* eslint-disable no-console */
-          console.warn('opaaaaaaa', error);
-          /* eslint-enable no-console */
         });
     },
     requestGoalList() {
@@ -99,8 +104,8 @@ export default {
       this.setLoader(true);
       this.goalResource.getGoals({ id })
         .then((doc) => {
-          this.goalList = doc.data.goals;
           this.setLoader(false);
+          this.updateGoalList(doc.data.goals);
         })
         .catch(() => {
           this.goalList = [];
