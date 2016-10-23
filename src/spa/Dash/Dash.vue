@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <navigation v-bind:balance="user ? user.balance : 0.0"></navigation>
+    <navigation v-bind:balance="getUser ? getUser.balance : 0.0"></navigation>
     <transition name="zoom"
         enter-active-class="zoomIn"
         leave-active-class="zoomOut">
@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/babel">
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import Navigation from '../../shared-components/Navigation';
 import Item from './Item';
@@ -55,7 +55,11 @@ export default {
       user: null,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      getUser: 'getUserObject',
+    }),
+  },
   components: {
     Item,
     RegisterModal,
