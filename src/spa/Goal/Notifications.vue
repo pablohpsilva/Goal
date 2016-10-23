@@ -47,26 +47,11 @@
     <action-bar></action-bar>
 
     <ul class="GoalNotifications">
-      <li class="GoalNotification">
+      <li class="GoalNotification"
+          v-for="notification in notifications">
         <i class="icon-list GoalNotification__Icon"></i>
-        <h3 class="GoalNotification__Title">Simple notification</h3>
-        <p class="GoalNotification__Text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
-        </p>
-      </li>
-      <li class="GoalNotification">
-        <i class="icon-list GoalNotification__Icon"></i>
-        <h3 class="GoalNotification__Title">Simple notification</h3>
-        <p class="GoalNotification__Text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
-        </p>
-      </li>
-      <li class="GoalNotification">
-        <i class="icon-list GoalNotification__Icon"></i>
-        <h3 class="GoalNotification__Title">Simple notification</h3>
-        <p class="GoalNotification__Text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.
-        </p>
+        <h3 class="GoalNotification__Title">{{ notification.date }}</h3>
+        <p class="GoalNotification__Text">{{ notification.message }}</p>
       </li>
     </ul>
   </div>
@@ -75,18 +60,39 @@
 <script>
 import ActionBar from '../../shared-components/ActionBar';
 
+import {
+  notificationsResource,
+ } from '../../vuex/resources';
+
 export default {
   props: {},
   vuex: {},
   data() {
-    return {};
+    return {
+      notificationsActions: notificationsResource(this.$resource),
+      notifications: [],
+    };
   },
   computed: {},
   watch: {},
   components: {
     ActionBar,
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    requestNotifications() {
+      const userId = 1,
+        goalId = 24;
+      this.notificationsActions.getGoalNotifications({ userId, goalId })
+        .then((success) => {
+          this.notifications = success.body.notifications;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  mounted() {
+    this.requestNotifications();
+  },
 };
 </script>
