@@ -107,82 +107,103 @@
         {{ title }}
       </div>
       <div class="RegisterModal__close"
-           v-on:click="closemodal">
+          v-on:click="closemodal">
         <i class="icon-cancel"></i>
       </div>
     </div>
     <div class="RegisterModal__content">
       <label class="RegisterModal__Label"
-             for="name">Name</label>
+          for="name">
+        Name
+      </label>
       <input id="name"
-             name="name"
-             class="RegisterModal__textinput"
-             type="text"
-             maxlength="50" />
+          name="name"
+          class="RegisterModal__textinput"
+          type="text"
+          maxlength="50" />
 
-      <label class="RegisterModal__Label" for="start_date">Start Date</label>
+      <label class="RegisterModal__Label"
+          for="start_date">
+        Start Date
+      </label>
       <input id="start_date"
-             name="date"
-             class="RegisterModal__textinput"
-             v-date
-             type="text" />
+          name="date"
+          class="RegisterModal__textinput"
+          type="text"
+          v-date/>
 
       <label class="RegisterModal__Label"
-             for="do_date">Do Date</label>
+          for="do_date">
+        Due Date
+      </label>
       <input id="do_date"
-             name="description"
-             class="RegisterModal__textinput"
-             type="text"
-             maxlength="250" />
+          name="description"
+          class="RegisterModal__textinput"
+          type="text"
+          v-date/>
 
       <label class="RegisterModal__Label"
-             for="description">Description</label>
+          for="description">
+        Description
+      </label>
       <textarea id="description"
-             name="description"
-             class="RegisterModal__textinput"
-             maxlength="250"></textarea>
+          name="description"
+          class="RegisterModal__textinput"
+          maxlength="250"></textarea>
     </div>
 
     <div class="RegisterModal__content"
-         v-show="addSubGoal">
+         v-show="addSubGoal && isGoal">
       <label class="RegisterModal__Label"
-             for="name_subgoal">Subgoal's name</label>
+          for="name_subgoal">
+        Subgoal's name
+      </label>
       <input id="name_subgoal"
-             v-model="newSubGoal.nameSubgoal"
-             class="RegisterModal__textinput"
-             type="text"
-             maxlength="50" />
+          v-model="newSubGoal.nameSubgoal"
+          class="RegisterModal__textinput"
+          type="text"
+          maxlength="50" />
 
       <label class="RegisterModal__Label"
-             for="value_subgoal">Subgoal's value</label>
+          for="value_subgoal">
+        Subgoal's value
+      </label>
       <input id="value_subgoal"
-             v-model="newSubGoal.valueSubgoal"
-             class="RegisterModal__textinput"
-             type="text"
-             maxlength="50" />
+          v-model="newSubGoal.valueSubgoal"
+          class="RegisterModal__textinput"
+          type="text"
+          maxlength="50"
+          v-money/>
 
       <label class="RegisterModal__Label"
-             for="description_subgoal">Subgoal's description</label>
+          for="description_subgoal">
+        Subgoal's description
+      </label>
       <textarea id="description_subgoal"
-                v-model="newSubGoal.descriptionSubgoal"
-                class="RegisterModal__textinput"
-                maxlength="250"></textarea>
+          v-model="newSubGoal.descriptionSubgoal"
+          class="RegisterModal__textinput"
+          maxlength="250"></textarea>
     </div>
 
     <button class="Btn__clean--small"
-            v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
-            type="button">{{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}</button>
+        type="button"
+        v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
+        v-show="isGoal">
+      {{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}
+    </button>
 
     <button class="Btn--subGoal"
-            v-for="(subGoal, index) in subGoalsList"
-            v-on:click="subGoalsList.splice(index, 1)"
-            type="button">
+        v-for="(subGoal, index) in subGoalsList"
+        v-on:click="subGoalsList.splice(index, 1)"
+        type="button">
       {{ subGoal.name }}
     </button>
 
     <div class="RegisterModal__footer">
       <button class="Btn__clean--white"
-              type="button">Add goal</button>
+          type="button">
+        Add goal
+      </button>
     </div>
   </div>
 </template>
@@ -214,7 +235,11 @@ export default {
       subGoalsList: [],
     };
   },
-  computed: {},
+  computed: {
+    isGoal() {
+      return this.title.toLowerCase().indexOf('goal') !== -1;
+    },
+  },
   components: {},
   methods: {
     openSubGoalForm(status) {
