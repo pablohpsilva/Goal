@@ -1,4 +1,5 @@
 import goal from './modules/goal';
+import loader from './modules/loader';
 import notifications from './modules/notifications';
 import subgoals from './modules/subgoals';
 import user from './modules/user';
@@ -16,6 +17,7 @@ export default {
   getters,
   modules: {
     goal,
+    loader,
     notifications,
     subgoals,
     user,
