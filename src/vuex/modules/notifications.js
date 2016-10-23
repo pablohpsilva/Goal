@@ -1,15 +1,15 @@
 import {
-  GOAL_OBJECT,
-  GOAL_COLLECTION,
+  NOTIFICATIONS_OBJECT,
+  NOTIFICATIONS_COLLECTION,
 } from '../mutation-types';
 
 const mutations = {
-  [GOAL_OBJECT](state, data) {
+  [NOTIFICATIONS_OBJECT](state, data) {
     if (data && typeof data === 'object') {
       state.goal = data;
     }
   },
-  [GOAL_COLLECTION](state, data) {
+  [NOTIFICATIONS_COLLECTION](state, data) {
     if (data && typeof data === 'object' && data.length) {
       state.goal = data;
     }
@@ -17,15 +17,11 @@ const mutations = {
 };
 
 const state = {
-  goal: {
-    dueDate: '',
-    description: '',
-    icon: '',
-    name: '',
-    value: 0,
-    reservedBalance: 0,
+  notification: {
+    date: '',
+    message: '',
   },
-  goals: [],
+  notifications: [],
 };
 
 export default {

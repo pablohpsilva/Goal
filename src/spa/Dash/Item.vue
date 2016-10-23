@@ -1,10 +1,11 @@
 <template lang="html">
-  <div class="Item__wrapper">
+  <div class="Item__wrapper"
+      v-if="item">
     <div class="Item__icon">
-      <i class="icon-alert"></i>
+      <i v-bind:class="item.icon"></i>
     </div>
     <div class="Item__info">
-      <span>Worldtrip</span>
+      <span>{{ item.name }}</span>
       <div class="Item__progressbar"
           v-bind:class="{
             'Item__gray': colorInterval === 'gray',
@@ -15,17 +16,21 @@
           v-bind:style="{ 'width': percentage + '%' }"></div>
     </div>
     <div class="Item__percentage">
-      70%
+      {{ percentage }}%
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    item: {
+      type: Object,
+      default() { return null; },
+    },
+  },
   data() {
-    return {
-      percentage: 30.0,
-    };
+    return {};
   },
   computed: {
     colorInterval() {
@@ -39,6 +44,13 @@ export default {
         return 'yellow';
       }
       return 'green';
+    },
+    percentage() {
+      const item = this.item;
+      if (item) {
+        return ((item.reservedBalance * 100) / item.value).toFixed(0);
+      }
+      return 0;
     },
   },
   components: {},
@@ -55,12 +67,12 @@ export default {
     .wrapper
       flex()
       background transparent
-      border-bottom: 1px solid rgba($trd-color, 0.6)
+      border-bottom: 1px solid rgba($trd-color, .2)
       color $trd-color
       font 400 1.5em/1em $rubik
       padding 4vh 15px
       &:hover
-        background rgba($trd-color, 0.6);
+        background rgba($trd-color, .2);
     .icon
       flex-basis(15%)
       font-size 2em

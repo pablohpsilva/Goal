@@ -1,5 +1,8 @@
 import goal from './modules/goal';
 import loader from './modules/loader';
+import notifications from './modules/notifications';
+import subgoals from './modules/subgoals';
+import user from './modules/user';
 
 // A Vuex instance is created by combining the state, the actions,
 // and the mutations. Because the actions and mutations are just
@@ -10,6 +13,9 @@ export default {
   modules: {
     goal,
     loader,
+    notifications,
+    subgoals,
+    user,
   },
   strict: true,
 };

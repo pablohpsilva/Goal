@@ -1,15 +1,15 @@
 import {
-  GOAL_OBJECT,
-  GOAL_COLLECTION,
+  SUBGOAL_OBJECT,
+  SUBGOAL_COLLECTION,
 } from '../mutation-types';
 
 const mutations = {
-  [GOAL_OBJECT](state, data) {
+  [SUBGOAL_OBJECT](state, data) {
     if (data && typeof data === 'object') {
       state.goal = data;
     }
   },
-  [GOAL_COLLECTION](state, data) {
+  [SUBGOAL_COLLECTION](state, data) {
     if (data && typeof data === 'object' && data.length) {
       state.goal = data;
     }
@@ -17,15 +17,13 @@ const mutations = {
 };
 
 const state = {
-  goal: {
-    dueDate: '',
-    description: '',
-    icon: '',
+  subgoal: {
+    id: -1,
     name: '',
     value: 0,
     reservedBalance: 0,
   },
-  goals: [],
+  subgoals: [],
 };
 
 export default {
