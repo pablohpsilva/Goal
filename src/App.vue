@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <loading v-bind:loading="getLoader"></loading>
+    <general-notifications></general-notifications>
     <transition>
       <keep-alive>
         <router-view class="view"></router-view>
@@ -14,6 +15,7 @@ import { mapGetters } from 'vuex';
 
 import Hello from './shared-components/Hello';
 import Loading from './shared-components/Loading';
+import GeneralNotifications from './shared-components/GeneralNotifications';
 
 export default {
   name: 'app',
@@ -25,6 +27,7 @@ export default {
   components: {
     Hello,
     Loading,
+    GeneralNotifications,
   },
 };
 </script>

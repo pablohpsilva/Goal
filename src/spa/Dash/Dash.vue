@@ -7,7 +7,8 @@
       <register-modal v-show="open"
           v-bind:open="open"
           v-bind:title="title"
-          v-on:closemodal="closeModal"></register-modal>
+          v-on:closemodal="closeModal"
+          v-on:changeloadingstatus="changeLoadingStatus"></register-modal>
     </transition>
     <div class="Dash__actions">
       <button class="Btn__clean--blue"
@@ -72,6 +73,9 @@ export default {
     ]),
     closeModal() {
       this.open = false;
+    },
+    changeLoadingStatus(status) {
+      this.setLoader(status);
     },
     openModal(title) {
       this.title = title;
