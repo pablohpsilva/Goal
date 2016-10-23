@@ -20,6 +20,10 @@
       position absolute
       top 0
       width 100%
+    .container
+      width 100%
+      max-width 800px
+      margin 0 auto
 
     .header
       flex()
@@ -102,117 +106,119 @@
 
 <template lang="html">
   <div class="RegisterModal__wrapper">
-    <div class="RegisterModal__header">
-      <div class="RegisterModal__title">
-        {{ title }}
-      </div>
-      <div class="RegisterModal__close"
-          v-on:click="closemodal">
-        <i class="icon-cancel"></i>
-      </div>
-    </div>
-
-    <div v-if="isGoal">
-      <div class="RegisterModal__content">
-        <label class="RegisterModal__Label"
-            for="name">
-          Name
-        </label>
-        <input id="name"
-            name="name"
-            class="RegisterModal__textinput"
-            type="text"
-            maxlength="50" />
-
-        <label class="RegisterModal__Label"
-            for="start_date">
-          Start Date
-        </label>
-        <input id="start_date"
-            name="date"
-            class="RegisterModal__textinput"
-            type="text"
-            v-date/>
-
-        <label class="RegisterModal__Label"
-            for="do_date">
-          Due Date
-        </label>
-        <input id="do_date"
-            name="description"
-            class="RegisterModal__textinput"
-            type="text"
-            v-date/>
-
-        <label class="RegisterModal__Label"
-            for="description">
-          Description
-        </label>
-        <textarea id="description"
-            name="description"
-            class="RegisterModal__textinput"
-            maxlength="250"></textarea>
+    <div class="RegisterModal__container">
+      <div class="RegisterModal__header">
+        <div class="RegisterModal__title">
+          {{ title }}
+        </div>
+        <div class="RegisterModal__close"
+            v-on:click="closemodal">
+          <i class="icon-cancel"></i>
+        </div>
       </div>
 
-      <div class="RegisterModal__content"
-           v-show="addSubGoal && isGoal">
-        <label class="RegisterModal__Label"
-            for="name_subgoal">
-          Subgoal's name
-        </label>
-        <input id="name_subgoal"
-            v-model="newSubGoal.nameSubgoal"
-            class="RegisterModal__textinput"
-            type="text"
-            maxlength="50" />
+      <div v-if="isGoal">
+        <div class="RegisterModal__content">
+          <label class="RegisterModal__Label"
+              for="name">
+            Name
+          </label>
+          <input id="name"
+              name="name"
+              class="RegisterModal__textinput"
+              type="text"
+              maxlength="50" />
 
-        <label class="RegisterModal__Label"
-            for="value_subgoal">
-          Subgoal's value
-        </label>
-        <input id="value_subgoal"
-            v-model="newSubGoal.valueSubgoal"
-            class="RegisterModal__textinput"
-            type="text"
-            maxlength="50"
-            v-money/>
+          <label class="RegisterModal__Label"
+              for="start_date">
+            Start Date
+          </label>
+          <input id="start_date"
+              name="date"
+              class="RegisterModal__textinput"
+              type="text"
+              v-date/>
 
-        <label class="RegisterModal__Label"
-            for="description_subgoal">
-          Subgoal's description
-        </label>
-        <textarea id="description_subgoal"
-            v-model="newSubGoal.descriptionSubgoal"
-            class="RegisterModal__textinput"
-            maxlength="250"></textarea>
+          <label class="RegisterModal__Label"
+              for="do_date">
+            Due Date
+          </label>
+          <input id="do_date"
+              name="description"
+              class="RegisterModal__textinput"
+              type="text"
+              v-date/>
+
+          <label class="RegisterModal__Label"
+              for="description">
+            Description
+          </label>
+          <textarea id="description"
+              name="description"
+              class="RegisterModal__textinput"
+              maxlength="250"></textarea>
+        </div>
+
+        <div class="RegisterModal__content"
+             v-show="addSubGoal && isGoal">
+          <label class="RegisterModal__Label"
+              for="name_subgoal">
+            Subgoal's name
+          </label>
+          <input id="name_subgoal"
+              v-model="newSubGoal.nameSubgoal"
+              class="RegisterModal__textinput"
+              type="text"
+              maxlength="50" />
+
+          <label class="RegisterModal__Label"
+              for="value_subgoal">
+            Subgoal's value
+          </label>
+          <input id="value_subgoal"
+              v-model="newSubGoal.valueSubgoal"
+              class="RegisterModal__textinput"
+              type="text"
+              maxlength="50"
+              v-money/>
+
+          <label class="RegisterModal__Label"
+              for="description_subgoal">
+            Subgoal's description
+          </label>
+          <textarea id="description_subgoal"
+              v-model="newSubGoal.descriptionSubgoal"
+              class="RegisterModal__textinput"
+              maxlength="250"></textarea>
+        </div>
+
+        <button class="Btn__clean--small"
+            type="button"
+            v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
+            v-show="isGoal">
+          {{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}
+        </button>
+
+        <button class="Btn--subGoal"
+            v-for="(subGoal, index) in subGoalsList"
+            v-on:click="subGoalsList.splice(index, 1)"
+            type="button">
+          {{ subGoal.name }}
+        </button>
       </div>
 
-      <button class="Btn__clean--small"
-          type="button"
-          v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
-          v-show="isGoal">
-        {{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}
-      </button>
+      <div v-else>
+        <range v-bind:value="rangeValue" v-on:changerangevalue="changeRangeValue"></range>
+        <selector v-bind:options="selectorOptions" v-on:changeselectedoption="changeSelectedOption"></selector>
+      </div>
 
-      <button class="Btn--subGoal"
-          v-for="(subGoal, index) in subGoalsList"
-          v-on:click="subGoalsList.splice(index, 1)"
-          type="button">
-        {{ subGoal.name }}
-      </button>
-    </div>
-
-    <div v-else>
-      <range v-bind:value="rangeValue" v-on:changerangevalue="changeRangeValue"></range>
-      <selector v-bind:options="selectorOptions" v-on:changeselectedoption="changeSelectedOption"></selector>
-    </div>
-
-    <div class="RegisterModal__footer">
-      <button class="Btn__clean--white"
-          type="button"
-          v-on:click.stop="persistGoal()">
-        Save
-      </button>
+      <div class="RegisterModal__footer">
+        <button class="Btn__clean--white"
+            type="button"
+            v-on:click.stop="persistGoal()">
+          Save
+        </button>
+      </div>
     </div>
   </div>
 </template>
