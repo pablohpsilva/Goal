@@ -21,10 +21,12 @@
 
       .GeneralNotification__RedIcon
         &::before
-          display none
+          transition opacity .6s ease
+          opacity 0
 
         &::after
-          display block
+          transition opacity .6s ease
+          opacity 1
 
   .GeneralNotifications__List
     list-style none
@@ -86,17 +88,19 @@
         position absolute
         top calc(50% - 10px)
         width 20px
+        transition opacity .6s ease
 
       &::before
         background $danger-color
         border-radius 50%
         content ""
         display block
+        opacity 1
 
       &::after
         color $danger-color
         content "x"
-        display none
+        opacity 0
         line-height .5
 </style>
 
