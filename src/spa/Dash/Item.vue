@@ -28,6 +28,8 @@
       border-radius 10px
       height 4px
       margin-top 0.5em
+      width 0
+      transition all 1.5s ease-in-out
 
       &.gray
         background $trd-color
@@ -52,8 +54,7 @@
 
 <template lang="html">
   <router-link class="Item__wrapper"
-      v-bind:to="{ name: 'goal', params: { id: item.goalId }}"
-      v-if="item">
+      v-bind:to="{ name: 'goal', params: { id: item.goalId }}">
     <div class="Item__icon">
       <i v-bind:class="item.icon"></i>
     </div>
