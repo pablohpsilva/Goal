@@ -11,7 +11,7 @@ const mutations = {
   },
   [GOAL_COLLECTION](state, data) {
     if (data && typeof data === 'object' && data.length) {
-      state.goal = data;
+      state.goals = data;
     }
   },
 };

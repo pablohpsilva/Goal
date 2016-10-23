@@ -12,6 +12,7 @@ export const routes = [
   {
     path: '/',
     component: Home,
+    redirect: '/dash',
     children: [
       {
         path: 'dash',
