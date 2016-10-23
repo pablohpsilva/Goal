@@ -5,6 +5,17 @@
   +prefix-classes('Selector__')
     .wrapper
       font-size 10px
+      position relative
+      &::after
+        content: '\e90b'
+        font-family: 'icomoon';
+        display block
+        position absolute
+        top 30px
+        right 0px
+        width 10px
+        height 10px
+        z-index 1
     .wrapperfixed
       position fixed
       top 0
