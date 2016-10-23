@@ -133,8 +133,9 @@
         background-color $sec-color
         background-image -webkit-linear-gradient(bottom, $sec-color 67%, $sec-color 89%, $primary-color 100%)
         background-image linear-gradient(to top, $sec-color 67%, $sec-color 89%, $primary-color 100%)
-        height 50vh
+        height 0
         width 100%
+        transition height 1.5s ease-in-out
 
         &--complete
           @extend .Goal__Bar-intern
@@ -151,7 +152,7 @@
 
       <h1 class="Goal__Title">
         <i class="icon-worldtrip"></i>
-        New York Trip
+        {{ goalName }}
       </h1>
     </div>
 
@@ -165,12 +166,18 @@
     </div>
 
     <ul class="Goal__SubGoals">
-      <li class="Goal__SubGoal--complete"
+      <li v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+          'Goal__SubGoal--complete' : 'Goal__SubGoal'"
           v-for="subgoal in subgoalList">
-        <span class="Goal__SubGoal-Description--complete">{{ subgoal.name }}</span>
+        <span v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+              'Goal__SubGoal-Description--complete' : 'Goal__SubGoal-Description'">
+              {{ subgoal.name }}
+        </span>
         <span class="Goal__SubGoal-Value">
           {{ '$ ' + subgoal.value.toFixed(2) }}
-          <span class="Goal__SubGoal-Percentage--complete">{{ calcPercentage(subgoal.value, subgoal.reservedBalance) }}%</span>
+          <span v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+                'Goal__SubGoal-Percentage--complete' : 'Goal__SubGoal-Percentage'">
+                {{ calcPercentage(subgoal.value, subgoal.reservedBalance) }}%</span>
         </span>
       </li>
     </ul>
@@ -258,6 +265,7 @@ export default {
       this.setLoader(true);
       this.subGoalsResource.getSubGoals({ id })
         .then((doc) => {
+          this.goalName = doc.data.goalName;
           this.subgoalList = doc.data.subGoals;
           this.setLoader(false);
         })
