@@ -85,9 +85,6 @@ export default {
       this.notificationsActions.getGoalNotifications({ userId, goalId })
         .then((success) => {
           this.notifications = success.body.notifications;
-        })
-        .catch((error) => {
-          console.log(error);
         });
     },
   },
