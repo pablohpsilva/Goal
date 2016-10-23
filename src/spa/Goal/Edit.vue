@@ -148,6 +148,8 @@ export default {
       subGoalsResource: subGoalsResource(this.$resource),
       open: false,
       title: 'Add subgoal',
+      goal: {},
+      subgoals: [],
     };
   },
   computed: {},
