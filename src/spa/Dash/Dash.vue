@@ -83,7 +83,6 @@ export default {
       this.signinResource.login(user)
         .then((doc) => {
           this.user = doc.data;
-          console.warn('this.setUser', this.setUser);
           this.setUser(doc.data);
         })
         .catch((error) => {
