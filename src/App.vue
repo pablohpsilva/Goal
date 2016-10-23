@@ -10,17 +10,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import Hello from './shared-components/Hello';
 import Loading from './shared-components/Loading';
 
-import { getLoader } from './vuex/getters';
-
 export default {
   name: 'app',
-  vuex: {
-    getters: {
-      getLoader,
-    },
+  computed: {
+    ...mapGetters({
+      getLoader: 'getLoader',
+    }),
   },
   components: {
     Hello,
