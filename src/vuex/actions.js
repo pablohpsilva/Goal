@@ -7,3 +7,4 @@ import * as mutations from './mutation-types';
 export const setUser = ({ dispatch }, data) => dispatch(mutations.USER_OBJECT, data);
 
 export const setGoal = ({ dispatch }, data) => dispatch(mutations.GOAL_OBJECT, data);
+export const setLoader = ({ commit }, data) => commit(mutations.LOADER_OBJECT, data);
