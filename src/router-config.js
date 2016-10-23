@@ -5,7 +5,6 @@ import GeneralNotifications from './spa/GeneralNotifications';
 import Goal from './spa/Goal/Goal';
 import Notifications from './spa/Goal/Notifications';
 import EditGoal from './spa/Goal/Edit';
-import NewGoal from './spa/Goal/NewGoal';
 
 import database from './vuex/database';
 
@@ -19,11 +18,6 @@ export const routes = [
         path: 'dash',
         name: 'dash',
         component: Dash,
-      },
-      {
-        path: 'new-goal',
-        name: 'new-goal',
-        component: NewGoal,
       },
       {
         path: 'goal/:id',

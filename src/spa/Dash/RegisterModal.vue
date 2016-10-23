@@ -111,104 +111,120 @@
         <i class="icon-cancel"></i>
       </div>
     </div>
-    <div class="RegisterModal__content">
-      <label class="RegisterModal__Label"
-          for="name">
-        Name
-      </label>
-      <input id="name"
-          name="name"
-          class="RegisterModal__textinput"
-          type="text"
-          maxlength="50" />
 
-      <label class="RegisterModal__Label"
-          for="start_date">
-        Start Date
-      </label>
-      <input id="start_date"
-          name="date"
-          class="RegisterModal__textinput"
-          type="text"
-          v-date/>
+    <div v-if="isGoal">
+      <div class="RegisterModal__content">
+        <label class="RegisterModal__Label"
+            for="name">
+          Name
+        </label>
+        <input id="name"
+            name="name"
+            class="RegisterModal__textinput"
+            type="text"
+            maxlength="50" />
 
-      <label class="RegisterModal__Label"
-          for="do_date">
-        Due Date
-      </label>
-      <input id="do_date"
-          name="description"
-          class="RegisterModal__textinput"
-          type="text"
-          v-date/>
+        <label class="RegisterModal__Label"
+            for="start_date">
+          Start Date
+        </label>
+        <input id="start_date"
+            name="date"
+            class="RegisterModal__textinput"
+            type="text"
+            v-date/>
 
-      <label class="RegisterModal__Label"
-          for="description">
-        Description
-      </label>
-      <textarea id="description"
-          name="description"
-          class="RegisterModal__textinput"
-          maxlength="250"></textarea>
+        <label class="RegisterModal__Label"
+            for="do_date">
+          Due Date
+        </label>
+        <input id="do_date"
+            name="description"
+            class="RegisterModal__textinput"
+            type="text"
+            v-date/>
+
+        <label class="RegisterModal__Label"
+            for="description">
+          Description
+        </label>
+        <textarea id="description"
+            name="description"
+            class="RegisterModal__textinput"
+            maxlength="250"></textarea>
+      </div>
+
+      <div class="RegisterModal__content"
+           v-show="addSubGoal && isGoal">
+        <label class="RegisterModal__Label"
+            for="name_subgoal">
+          Subgoal's name
+        </label>
+        <input id="name_subgoal"
+            v-model="newSubGoal.nameSubgoal"
+            class="RegisterModal__textinput"
+            type="text"
+            maxlength="50" />
+
+        <label class="RegisterModal__Label"
+            for="value_subgoal">
+          Subgoal's value
+        </label>
+        <input id="value_subgoal"
+            v-model="newSubGoal.valueSubgoal"
+            class="RegisterModal__textinput"
+            type="text"
+            maxlength="50"
+            v-money/>
+
+        <label class="RegisterModal__Label"
+            for="description_subgoal">
+          Subgoal's description
+        </label>
+        <textarea id="description_subgoal"
+            v-model="newSubGoal.descriptionSubgoal"
+            class="RegisterModal__textinput"
+            maxlength="250"></textarea>
+      </div>
+
+      <button class="Btn__clean--small"
+          type="button"
+          v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
+          v-show="isGoal">
+        {{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}
+      </button>
+
+      <button class="Btn--subGoal"
+          v-for="(subGoal, index) in subGoalsList"
+          v-on:click="subGoalsList.splice(index, 1)"
+          type="button">
+        {{ subGoal.name }}
+      </button>
     </div>
 
-    <div class="RegisterModal__content"
-         v-show="addSubGoal && isGoal">
-      <label class="RegisterModal__Label"
-          for="name_subgoal">
-        Subgoal's name
-      </label>
-      <input id="name_subgoal"
-          v-model="newSubGoal.nameSubgoal"
-          class="RegisterModal__textinput"
-          type="text"
-          maxlength="50" />
-
-      <label class="RegisterModal__Label"
-          for="value_subgoal">
-        Subgoal's value
-      </label>
-      <input id="value_subgoal"
-          v-model="newSubGoal.valueSubgoal"
-          class="RegisterModal__textinput"
-          type="text"
-          maxlength="50"
-          v-money/>
-
-      <label class="RegisterModal__Label"
-          for="description_subgoal">
-        Subgoal's description
-      </label>
-      <textarea id="description_subgoal"
-          v-model="newSubGoal.descriptionSubgoal"
-          class="RegisterModal__textinput"
-          maxlength="250"></textarea>
+    <div v-else>
+      <range v-bind:value="rangeValue" v-on:changerangevalue="changeRangeValue"></range>
+      <selector v-bind:options="selectorOptions" v-on:changeselectedoption="changeSelectedOption"></selector>
     </div>
-
-    <button class="Btn__clean--small"
-        type="button"
-        v-on:click="addSubGoal = (addSubGoal) ? addSubGoalsListItem() : openSubGoalForm(true)"
-        v-show="isGoal">
-      {{ (addSubGoal) ? 'Save subgoal' : 'Add subgoal' }}
-    </button>
-
-    <button class="Btn--subGoal"
-        v-for="(subGoal, index) in subGoalsList"
-        v-on:click="subGoalsList.splice(index, 1)"
-        type="button">
-      {{ subGoal.name }}
-    </button>
 
     <div class="RegisterModal__footer">
       <button class="Btn__clean--white"
-          type="button">
-        Add goal
+          type="button"
+          v-on:click.stop="persistGoal()">
+        Save
       </button>
     </div>
   </div>
 </template>
 
 <script type="text/babel">
+import { mapActions } from 'vuex';
+
+import Range from '../../shared-components/Range';
+import Selector from '../../shared-components/Selector';
+
+import { goalsResource } from '../../vuex/resources';
+
 export default {
   props: {
     open: {
@@ -233,6 +249,15 @@ export default {
       },
       addSubGoal: false,
       subGoalsList: [],
+      goalResource: goalsResource(this.$resource),
+      selectedOption: null,
+      selectorOptions: [
+        { name: 'Worldtrip', icon: 'icon-airplane' },
+        { name: 'School', icon: 'icon-house' },
+        { name: 'Baby', icon: 'icon-baby' },
+        { name: 'Building home', icon: 'icon-house' },
+      ],
+      rangeValue: 0,
     };
   },
   computed: {
@@ -240,8 +265,20 @@ export default {
       return this.title.toLowerCase().indexOf('goal') !== -1;
     },
   },
-  components: {},
+  components: {
+    Range,
+    Selector,
+  },
   methods: {
+    ...mapActions([
+      'setGoalCollection',
+    ]),
+    changeSelectedOption(item) {
+      this.selectedOption = item;
+    },
+    changeRangeValue(value) {
+      this.rangeValue = value;
+    },
     openSubGoalForm(status) {
       return status;
     },
@@ -258,8 +295,25 @@ export default {
         descriptionSubgoal: '',
       };
     },
+    persistGoal() {
+      this.changeLoadingStatus(true);
+
+      const id = 1;
+      this.goalResource.persistGoal({ id }, {})
+        .then((doc) => {
+          this.setGoalCollection(doc.data.goals);
+          this.closemodal();
+          this.changeLoadingStatus(false);
+        })
+        .catch(() => {
+          this.changeLoadingStatus(false);
+        });
+    },
     closemodal() {
       this.$emit('closemodal');
+    },
+    changeLoadingStatus(status) {
+      this.$emit('changeloadingstatus', status);
     },
   },
   mounted() {},
