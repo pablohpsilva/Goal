@@ -1,5 +1,6 @@
 import Login from './spa/Login';
 import Home from './spa/Home';
+import Landing from './spa/Landing/Landing';
 import Dash from './spa/Dash/Dash';
 import GeneralNotifications from './spa/GeneralNotifications';
 import Goal from './spa/Goal/Goal';
@@ -15,6 +16,11 @@ export const routes = [
     path: '/',
     component: Home,
     children: [
+      {
+        path: 'landing',
+        name: 'landing',
+        component: Landing,
+      },
       {
         path: 'dash',
         name: 'dash',
