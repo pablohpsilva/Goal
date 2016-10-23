@@ -133,9 +133,9 @@
         background-color $sec-color
         background-image -webkit-linear-gradient(bottom, $sec-color 67%, $sec-color 89%, $primary-color 100%)
         background-image linear-gradient(to top, $sec-color 67%, $sec-color 89%, $primary-color 100%)
-        height 50vh
+        height 0
         width 100%
-        transition height .3s ease
+        transition height 1.5s ease-in-out
 
         &--complete
           @extend .Goal__Bar-intern
@@ -175,7 +175,9 @@
         </span>
         <span class="Goal__SubGoal-Value">
           {{ '$ ' + subgoal.value.toFixed(2) }}
-          <span class="Goal__SubGoal-Percentage--complete">{{ calcPercentage(subgoal.value, subgoal.reservedBalance) }}%</span>
+          <span v-bind:class="(calcPercentage(subgoal.value, subgoal.reservedBalance) === 100) ?
+                'Goal__SubGoal-Percentage--complete' : 'Goal__SubGoal-Percentage'">
+                {{ calcPercentage(subgoal.value, subgoal.reservedBalance) }}%</span>
         </span>
       </li>
     </ul>
