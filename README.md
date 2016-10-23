@@ -5,7 +5,7 @@
 
 ## Meet the team!
 
-* Designer: Garcia, Fernando [github](https://github.com/garciafsouza) [linkedin](https://www.linkedin.com/in/garciafsouza)
+* UX Designer: Garcia, Fernando [github](https://github.com/garciafsouza) [linkedin](https://www.linkedin.com/in/garciafsouza)
 * Frontend Developer: Silva, Pablo Henrique [github](https://github.com/pablohpsilva) [linkedin](https://www.linkedin.com/in/pablohpsilva)
 * Frontend Developer: Vilaboim, Lucas [github](https://github.com/vilaboim) [linkedin](https://www.linkedin.com/in/vilaboim)
 * Frontend Developer: Costa, Eduardo [github](https://github.com/eduardogc) [linkedin](https://www.linkedin.com/in/geceduardo)
