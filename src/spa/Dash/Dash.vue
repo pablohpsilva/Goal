@@ -29,6 +29,10 @@
     <div v-if="getGoals && getGoals.length">
       <item v-for="goal in getGoals" v-bind:item="goal"></item>
     </div>
+    <div class="Dash__NoContent"
+        v-else>
+      Service Unavailable. :(
+    </div>
   </div>
 </template>
 
@@ -129,6 +133,9 @@ export default {
       flex()
       flex-justify(space-around)
       padding 5vh 15px
+    .NoContent
+      font 400 2em/1em $rubik
+      text-align center
   .Btn__clean--blue
     font-size 1.3em
     width 10em
