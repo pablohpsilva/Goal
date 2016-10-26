@@ -12,6 +12,8 @@
 
 ## How to build it?
 
+![The Magic Trick Team](src/assets/giphy.gif)
+
 ``` bash
 # install dependencies
 yarn install
